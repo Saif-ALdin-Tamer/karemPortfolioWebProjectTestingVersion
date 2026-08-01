@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GKEKKX1CV1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GKEKKX1CV1', { 'debug_mode': true });
+</script>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
 <title>Karim Abdelaziz — Film Director & Video Editor | Cairo</title>
@@ -291,11 +300,9 @@
     <div class="photo-bg"></div>
   </div>
   <div class="hero-content">
-    <div class="hero-greet" data-en="Hi I'm" data-ar="أهلاً، أنا">Hi I'm</div>
-    <h1 class="hero-name" data-en-only="true">
-      <span style="display:block;">Karim</span>
-      <span style="display:block;">Abdelaziz</span>
-    </h1>
+    <div class="hero-signature" data-en-only="true">
+      <img src="signature.png" alt="Karim Abdelaziz" class="signature-img">
+    </div>
     <h1 class="hero-name" data-ar-only="true" style="display:none;">
       <span style="display:block; margin-bottom: 0.25em;">كريم</span>
       <span style="display:block;">عبدالعزيز</span>
@@ -945,7 +952,7 @@
         </div>
         <span class="svc-cta" data-en="View Work" data-ar="شاهد الأعمال">View Work</span>
         <div class="svc-dots">
-          <span class="svc-dots-text">Tap here for more</span>
+          <span class="svc-dots-text" data-en="Tap here for more" data-ar="اضغط هنا للمزيد">Tap here for more</span>
 
         </div>
       </div>
@@ -957,7 +964,7 @@
         </div>
         <span class="svc-cta" data-en="View Work" data-ar="شاهد الأعمال">View Work</span>
         <div class="svc-dots">
-          <span class="svc-dots-text">Tap here for more</span>
+          <span class="svc-dots-text" data-en="Tap here for more" data-ar="اضغط هنا للمزيد">Tap here for more</span>
 
         </div>
       </div>
@@ -969,7 +976,7 @@
         </div>
         <span class="svc-cta" data-en="View Work" data-ar="شاهد الأعمال">View Work</span>
         <div class="svc-dots">
-          <span class="svc-dots-text">Tap here for more</span>
+          <span class="svc-dots-text" data-en="Tap here for more" data-ar="اضغط هنا للمزيد">Tap here for more</span>
 
         </div>
       </div>
@@ -981,7 +988,7 @@
         </div>
         <span class="svc-cta" data-en="View Work" data-ar="شاهد الأعمال">View Work</span>
         <div class="svc-dots">
-          <span class="svc-dots-text">Tap here for more</span>
+          <span class="svc-dots-text" data-en="Tap here for more" data-ar="اضغط هنا للمزيد">Tap here for more</span>
 
         </div>
       </div>
@@ -993,7 +1000,7 @@
         </div>
         <span class="svc-cta" data-en="View Work" data-ar="شاهد الأعمال">View Work</span>
         <div class="svc-dots">
-          <span class="svc-dots-text">Tap here for more</span>
+          <span class="svc-dots-text" data-en="Tap here for more" data-ar="اضغط هنا للمزيد">Tap here for more</span>
 
         </div>
       </div>
@@ -1005,7 +1012,7 @@
         </div>
         <span class="svc-cta" data-en="View Work" data-ar="شاهد الأعمال">View Work</span>
         <div class="svc-dots">
-          <span class="svc-dots-text">Tap here for more</span>
+          <span class="svc-dots-text" data-en="Tap here for more" data-ar="اضغط هنا للمزيد">Tap here for more</span>
 
         </div>
       </div>
@@ -1045,17 +1052,17 @@
 <div class="modal-overlay" id="modal">
   <div class="modal">
     <button class="modal-close" id="modalClose">✕</button>
-    <div class="modal-eyebrow" id="modalEyebrow">Selected Work</div>
+    <div class="modal-eyebrow" id="modalEyebrow" data-en="Selected Work" data-ar="أعمال مختارة">Selected Work</div>
     <h2 class="modal-title" id="modalTitle">Video Editing</h2>
     <div class="modal-slider-wrap">
-      <button class="modal-arrow left" aria-label="Previous" onclick="document.getElementById('modalWorks').scrollBy({left: -document.getElementById('modalWorks').clientWidth, behavior: 'smooth'})"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+      <button class="modal-arrow left" id="modalArrowLeft" aria-label="Previous"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
       <div class="modal-works" id="modalWorks"></div>
-      <button class="modal-arrow right" aria-label="Next" onclick="document.getElementById('modalWorks').scrollBy({left: document.getElementById('modalWorks').clientWidth, behavior: 'smooth'})"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+      <button class="modal-arrow right" id="modalArrowRight" aria-label="Next"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
     </div>
     
     <div class="modal-bottom-info">
-      <div class="modal-description" id="modalDescription">
-        LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT, SED DO EIUSMOD TEMPOR INCIDIDUNT
+      <div class="modal-description" id="modalDescription" data-en="Selected work showcase for this specialization." data-ar="عرض نماذج الأعمال المختارة لهذا التخصص.">
+        Selected work showcase for this specialization.
       </div>
       <div class="modal-pagination" id="modalPagination">
         <span class="dot active"></span>
@@ -1095,6 +1102,40 @@
         <a href="#" onclick="openQuickBrief();return false;" class="consult-btn">
           <span data-en="Book a Consultation" data-ar="احجز استشارة">Book a Consultation</span>
         </a>
+      </div>
+    </div>
+
+    <!-- WHO IS YOUR DIRECTOR SECTION -->
+    <div class="who-is-director-section">
+      <div class="who-is-director-grid">
+        <div class="who-is-director-visual">
+          <button class="director-slider-btn left" aria-label="Previous image" type="button" onclick="window.prevMentorPhoto()">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/>
+            </svg>
+          </button>
+          <div class="who-is-director-photo-wrap">
+            <img src="correct-photo.jpeg" alt="Karim Abdelaziz - Film Director" class="who-is-director-photo" id="directorPhotoImg">
+            <div class="who-is-director-photo-dots" id="directorPhotoDots"></div>
+          </div>
+          <button class="director-slider-btn right" aria-label="Next image" type="button" onclick="window.nextMentorPhoto()">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+            </svg>
+          </button>
+        </div>
+        <div class="who-is-director-content">
+          <div class="who-is-director-eyebrow" data-en="WHO IS" data-ar="من هو">WHO IS</div>
+          <h2 class="who-is-director-title" data-en="YOUR<br><span>MENTOR?</span>" data-ar="مدربـك؟<br><span>كريم عبد العزيز</span>">
+            YOUR<br><span>MENTOR?</span>
+          </h2>
+          <p class="who-is-director-text" data-en="Karim Abdelaziz is one of the most recognized film directors and video editors in the Middle East. With over <strong>8 years</strong> of professional experience, he has been responsible for crafting cinematic content, developing brands, and positioning companies as leaders in their industry through powerful visual storytelling." data-ar="كريم عبد العزيز هو أحد أبرز مخرجي الأفلام ومونتيري الفيديو في الشرق الأوسط. بخبرة مهنية تتجاوز <strong>٨ سنوات</strong>، كان مسؤولاً عن صناعة محتوى سينمائي، تطوير العلامات التجارية، وتمكين الشركات من الريادة في مجالها من خلال السرد البصري القوي.">
+            Karim Abdelaziz is one of the most recognized film directors and video editors in the Middle East. With over <strong>8 years</strong> of professional experience, he has been responsible for crafting cinematic content, developing brands, and positioning companies as leaders in their industry through powerful visual storytelling.
+          </p>
+          <p class="who-is-director-text" data-en="In total, Karim has delivered more than <strong>1,300 projects</strong>, worked across <strong>14 countries</strong>, and collaborated with brands like <strong>Samsung, CUPRA, 9GAG, Artlist, and Asus</strong> — and now he's ready to bring that same cinematic excellence to <strong class='highlight'>your brand</strong>." data-ar="في المجمل، نفذ كريم أكثر من <strong>١,٣٠٠ مشروع</strong>، وعمل في <strong>١٤ دولة</strong>، وتعاون مع علامات تجارية مثل <strong>Samsung و CUPRA و 9GAG و Artlist و Asus</strong> — وهو الآن مستعد لنقل هذا التميز السينمائي إلى <strong class='highlight'>علامتك التجارية</strong>.">
+            In total, Karim has delivered more than <strong>1,300 projects</strong>, worked across <strong>14 countries</strong>, and collaborated with brands like <strong>Samsung, CUPRA, 9GAG, Artlist, and Asus</strong> — and now he's ready to bring that same cinematic excellence to <strong class="highlight">your brand</strong>.
+          </p>
+        </div>
       </div>
     </div>
 
@@ -1432,6 +1473,10 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
         Home Page Picture
       </a>
+      <a data-admin-page="home-page-edit">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Home Page
+      </a>
       <a data-admin-page="intro-pages">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
         Intro Pages
@@ -1584,6 +1629,46 @@
           <div id="adminTrainingStatsList" class="admin-list" style="margin-top:20px;"></div>
         </div>
 
+        <!-- WHO IS YOUR MENTOR SECTION CARD -->
+        <div class="admin-card">
+          <h3 style="margin-top: 12px; margin-bottom: 20px; color: var(--admin-accent);">Who Is Your Mentor Section (قسم الإرشاد)</h3>
+
+          <!-- MENTOR PHOTOS MANAGER -->
+          <div style="margin-top:10px; padding-top:10px;">
+            <h4 style="margin-bottom:12px; font-size:16px;">Mentor Photos (Slider Gallery)</h4>
+            <p style="font-size:13px; color:var(--admin-text-muted); margin-bottom:14px;">Add multiple photos for the mentor section. Visitors can slide through them on the Training page.</p>
+            
+            <div class="admin-add-work-form" style="gap:10px; flex-wrap:wrap; align-items:center;">
+              <input type="file" id="adminMentorPhotoFile" accept="image/*" style="display:none;">
+              <button type="button" class="admin-btn-secondary" onclick="document.getElementById('adminMentorPhotoFile').click()" style="padding:8px 14px; font-size:13px;">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg> Choose Photo File
+              </button>
+              <span style="font-size:13px; color:var(--admin-text-muted);">or</span>
+              <input type="text" id="adminMentorPhotoUrl" class="admin-input" placeholder="Paste Image URL..." style="flex:1; min-width:200px;">
+              <button type="button" class="admin-add-btn" id="adminAddMentorPhotoBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14m-7-7h14"/></svg> Add Photo
+              </button>
+            </div>
+
+            <div id="adminMentorPhotosList" class="mentor-photos-admin-grid" style="margin-top:16px;"></div>
+          </div>
+
+          <!-- MENTOR PARAGRAPHS MANAGER -->
+          <div style="margin-top:24px; border-top:1px solid var(--admin-border-light); padding-top:20px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+              <div>
+                <h4 style="margin-bottom:4px; font-size:16px;">Mentor Bio Paragraphs & Formatting</h4>
+                <p style="font-size:13px; color:var(--admin-text-muted); margin:0;">Add, edit, remove bio text paragraphs and control normal vs bold styling.</p>
+              </div>
+              <button type="button" class="admin-add-btn" id="adminOpenAddMentorParaBtn" onclick="window.adminApp.openMentorParaModal(-1)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14m-7-7h14"/></svg> Add Paragraph
+              </button>
+            </div>
+
+            <div id="adminMentorParasList" class="admin-list" style="margin-top:16px;"></div>
+          </div>
+        </div>
+
         <div class="admin-card">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
             <h3 style="margin-top: 24px; margin-bottom: 24px;">Student Videos</h3>
@@ -1640,6 +1725,114 @@
             <p style="margin-top: 0.5rem; font-size: 0.85rem; color: rgba(255,255,255,0.5);">
               Recommended dimensions: 2752 x 1536 pixels, transparent background. Custom photos are stored directly in your browser.
             </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ HOME PAGE EDIT ═══ -->
+      <div class="admin-page" data-admin-content="home-page-edit">
+        <div class="admin-section-header">
+          <div>
+            <h2 class="admin-section-title">Home Page</h2>
+            <p class="admin-section-subtitle">Edit the intro text and "What I Do" service cards on your home page.</p>
+          </div>
+        </div>
+
+        <!-- Section 1: Edit Intro Text -->
+        <div class="admin-card">
+          <h3 style="margin-top: 24px; margin-bottom: 16px;">Edit Intro Text of Home Page</h3>
+          <p style="font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-bottom: 20px;">
+            Edit the hero tagline text. Select any word and click <strong>B</strong> to make it bold, or <strong>N</strong> to remove bold.
+          </p>
+
+          <div class="admin-form-group">
+            <label class="admin-label">English Text</label>
+            <div class="admin-text-toolbar">
+              <button type="button" class="admin-toolbar-btn" id="introTextBoldBtnEn" title="Bold selected text">
+                <strong>B</strong>
+              </button>
+              <button type="button" class="admin-toolbar-btn" id="introTextNormalBtnEn" title="Remove bold from selected text">
+                N
+              </button>
+            </div>
+            <div id="adminHomeIntroTextEn" class="admin-richtext-editor" contenteditable="true" data-placeholder="Enter English intro text..."></div>
+          </div>
+
+          <div class="admin-form-group" style="margin-top: 20px;">
+            <label class="admin-label">Arabic Text</label>
+            <div class="admin-text-toolbar">
+              <button type="button" class="admin-toolbar-btn" id="introTextBoldBtnAr" title="Bold selected text">
+                <strong>B</strong>
+              </button>
+              <button type="button" class="admin-toolbar-btn" id="introTextNormalBtnAr" title="Remove bold from selected text">
+                N
+              </button>
+            </div>
+            <div id="adminHomeIntroTextAr" class="admin-richtext-editor" contenteditable="true" dir="rtl" data-placeholder="أدخل النص العربي..."></div>
+          </div>
+
+          <div style="text-align: right; margin-top: 20px;">
+            <button class="admin-btn-primary" id="adminSaveHomeIntroText" style="padding: 12px 24px; font-size: 16px;">Save Intro Text</button>
+          </div>
+        </div>
+
+        <!-- Section 2: Edit What I Do -->
+        <div class="admin-card" style="margin-top: 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h3 style="margin-top: 24px; margin-bottom: 0;">Edit "What I Do" Section</h3>
+            <button class="admin-add-btn" id="adminAddHomeSvcBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14m-7-7h14"/></svg> Add Card
+            </button>
+          </div>
+          <p style="font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-bottom: 20px;">
+            Manage the service cards in the "Crafted for the moment." section on the home page.
+          </p>
+          <div id="adminHomeSvcList" class="admin-list"></div>
+        </div>
+
+        <!-- Modal for Add/Edit Service Card -->
+        <div class="admin-modal-overlay" id="adminHomeSvcModal">
+          <div class="admin-modal">
+            <div class="admin-modal-header">
+              <h3 id="adminHomeSvcModalTitle">Add Service Card</h3>
+              <button class="admin-modal-close">&times;</button>
+            </div>
+            <div class="admin-modal-body">
+              <input type="hidden" id="adminHomeSvcEditIndex" value="-1">
+              <div class="admin-form-group">
+                <label class="admin-label">Icon</label>
+                <select id="adminHomeSvcIcon" class="admin-input">
+                  <option value="video">🎬 Video Editing</option>
+                  <option value="camera">📷 Cinematography</option>
+                  <option value="document">📄 Brand & Documentary</option>
+                  <option value="music">🎵 Music / Audio</option>
+                  <option value="motion">✨ Motion Graphics</option>
+                  <option value="social">📱 Social Media</option>
+                  <option value="photo">🖼️ Photography</option>
+                  <option value="design">🎨 Design</option>
+                </select>
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-label">Title (EN)</label>
+                <input type="text" id="adminHomeSvcTitleEn" class="admin-input" placeholder="e.g. Video Editing">
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-label">Title (AR)</label>
+                <input type="text" id="adminHomeSvcTitleAr" class="admin-input" dir="rtl" placeholder="e.g. مونتاج الفيديو">
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-label">Description (EN)</label>
+                <textarea id="adminHomeSvcDescEn" class="admin-input admin-textarea" rows="2" placeholder="Short description in English"></textarea>
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-label">Description (AR)</label>
+                <textarea id="adminHomeSvcDescAr" class="admin-input admin-textarea" rows="2" dir="rtl" placeholder="وصف قصير بالعربية"></textarea>
+              </div>
+            </div>
+            <div class="admin-modal-footer">
+              <button class="admin-btn-secondary admin-modal-close">Cancel</button>
+              <button class="admin-btn-primary" id="adminSaveHomeSvc">Save</button>
+            </div>
           </div>
         </div>
       </div>
@@ -2362,6 +2555,44 @@
 
 </div>
 
+
+<div class="admin-modal-overlay" id="adminMentorParaModal">
+  <div class="admin-modal" style="max-width:650px;">
+    <div class="admin-modal-header">
+      <h3 class="admin-modal-title" id="mentorParaModalTitle">Add Mentor Paragraph</h3>
+      <button class="admin-modal-close" onclick="document.getElementById('adminMentorParaModal').classList.remove('active')">&times;</button>
+    </div>
+    <div class="admin-modal-body">
+      <input type="hidden" id="mentorParaEditIndex" value="-1">
+      
+      <div class="admin-form-group">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <label style="margin:0;">Paragraph Text (English)</label>
+          <div style="display:flex; gap:6px;">
+            <button type="button" class="para-format-btn bold-btn" onclick="window.adminApp.toggleRichTextBold('mentorParaTextEn', true)" title="Make selected text bold">B</button>
+            <button type="button" class="para-format-btn normal-btn" onclick="window.adminApp.toggleRichTextBold('mentorParaTextEn', false)" title="Make selected text normal">N</button>
+          </div>
+        </div>
+        <div id="mentorParaTextEn" class="admin-input admin-textarea admin-richtext-editor" contenteditable="true" data-placeholder="Enter paragraph text in English..."></div>
+      </div>
+
+      <div class="admin-form-group">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <label style="margin:0;">Paragraph Text (Arabic)</label>
+          <div style="display:flex; gap:6px;">
+            <button type="button" class="para-format-btn bold-btn" onclick="window.adminApp.toggleRichTextBold('mentorParaTextAr', true)" title="Make selected text bold">B</button>
+            <button type="button" class="para-format-btn normal-btn" onclick="window.adminApp.toggleRichTextBold('mentorParaTextAr', false)" title="Make selected text normal">N</button>
+          </div>
+        </div>
+        <div id="mentorParaTextAr" class="admin-input admin-textarea admin-richtext-editor" contenteditable="true" dir="rtl" data-placeholder="أدخل نص الفقرة باللغة العربية..."></div>
+      </div>
+    </div>
+    <div class="admin-modal-footer">
+      <button class="admin-btn-secondary" onclick="document.getElementById('adminMentorParaModal').classList.remove('active')">Cancel</button>
+      <button class="admin-btn-primary" onclick="window.adminApp.saveMentorPara()">Save Paragraph</button>
+    </div>
+  </div>
+</div>
 
 <div class="admin-modal-overlay" id="adminTrainingVideoModal">
   <div class="admin-modal">

@@ -187,6 +187,8 @@ body.admin-mode .floating-actions-container {
 .admin-dashboard {
   position: fixed;
   inset: 0;
+  width: 100%;
+  height: 100%;
   display: none;
   background-color: var(--admin-bg);
   z-index: 99999; /* Increased to cover all modals/videos */
@@ -314,7 +316,8 @@ body.admin-mode .floating-actions-container {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
+  min-height: 0;
   overflow: hidden;
 }
 
@@ -379,11 +382,12 @@ body.admin-mode .floating-actions-container {
 }
 
 .admin-content {
-  flex-grow: 1;
+  flex: 1 1 0;
   padding: 32px;
-  overflow-y: auto;
+  overflow-y: auto !important;
   overflow-x: hidden;
   min-height: 0;
+  max-height: 100%;
 }
 
 .admin-page {
@@ -1308,4 +1312,135 @@ body.admin-mode::-webkit-scrollbar-thumb:hover,
 .admin-modal-body::-webkit-scrollbar-thumb:hover,
 .admin-list::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.3);
+}
+
+/* ═══ HOME PAGE EDIT STYLES ═══ */
+
+/* Text formatting toolbar */
+.admin-text-toolbar {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.admin-toolbar-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius-sm);
+  background: var(--admin-surface);
+  color: var(--admin-text);
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--admin-transition);
+}
+
+.admin-toolbar-btn:hover {
+  background: var(--admin-primary);
+  border-color: var(--admin-primary);
+  color: #fff;
+}
+
+.admin-toolbar-btn:active {
+  transform: scale(0.95);
+}
+
+/* Richtext editor (WYSIWYG) */
+.admin-richtext-editor {
+  min-height: 90px;
+  padding: 14px 16px;
+  border-radius: var(--admin-radius-sm);
+  background: var(--admin-surface);
+  border: 1px solid var(--admin-border);
+  color: var(--admin-text);
+  font-size: 15px;
+  line-height: 1.7;
+  outline: none;
+  transition: var(--admin-transition);
+}
+
+.admin-richtext-editor:focus {
+  border-color: var(--admin-primary);
+  box-shadow: 0 0 0 3px rgba(72, 103, 255, 0.15);
+}
+
+.admin-richtext-editor[data-placeholder]:empty:before {
+  content: attr(data-placeholder);
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.admin-richtext-editor em,
+.admin-richtext-editor b,
+.admin-richtext-editor strong {
+  font-style: normal;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+/* Service card icon preview in admin list */
+.admin-svc-icon-preview {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(72, 103, 255, 0.15);
+  border-radius: var(--admin-radius-sm);
+  flex-shrink: 0;
+}
+
+.admin-svc-icon-preview svg {
+  width: 22px;
+  height: 22px;
+  stroke: var(--admin-primary);
+}
+
+/* Responsive adjustments for Home Page admin */
+@media (max-width: 768px) {
+  .admin-text-toolbar {
+    flex-wrap: wrap;
+  }
+  .admin-text-preview {
+    font-size: 13px;
+    padding: 12px 14px;
+  }
+}
+
+/* Paragraph Format Buttons (B & N) */
+.para-format-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(18, 30, 52, 0.85);
+  border: 1px solid rgba(100, 140, 255, 0.3);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+.para-format-btn.bold-btn {
+  font-weight: 800;
+}
+.para-format-btn.normal-btn {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+}
+.para-format-btn:hover {
+  background: rgba(72, 103, 255, 0.35);
+  border-color: rgba(110, 168, 229, 0.7);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(72, 103, 255, 0.2);
+}
+.para-format-btn:active {
+  transform: translateY(0);
 }

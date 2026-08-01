@@ -360,56 +360,62 @@ renderFrontendIntroPages();
   window.serviceWorks = {
     editing: {
       title: "Video Editing",
+      title_ar: "مونتاج الفيديو",
       works: [
-        { cat: "Brand Film", name: "Tech Launch Video" },
-        { cat: "Music Video", name: "Indie Artist Reel" },
-        { cat: "Corporate", name: "Annual Report Film" },
-        { cat: "Cinematic", name: "Travel Diary 2025" },
+        { cat: "Brand Film", cat_ar: "فيلم براند", name: "Tech Launch Video", name_ar: "فيديو إطلاق منتج تقني", desc: "Cinematic brand film crafted for tech launch.", desc_ar: "فيلم سينمائي لإطلاق منتج تقني جديد." },
+        { cat: "Music Video", cat_ar: "فيديو كليب", name: "Indie Artist Reel", name_ar: "ريل فنان مستقل", desc: "Rhythmic music video edit with dynamic cuts.", desc_ar: "مونتاج إيقاعي للفيديو كليب مع قطعات ديناميكية." },
+        { cat: "Corporate", cat_ar: "شركات", name: "Annual Report Film", name_ar: "فيلم التقرير السنوي", desc: "Professional corporate video highlighting achievements.", desc_ar: "فيديو احترافي يبرز إنجازات الشركة السنوية." },
+        { cat: "Cinematic", cat_ar: "سينمائي", name: "Travel Diary 2025", name_ar: "يوميات سفر ٢٠٢٥", desc: "Atmospheric travel film with immersive sound design.", desc_ar: "فيلم سفر سينمائي مع تصميم صوتي غامر." },
       ],
     },
     cinematography: {
       title: "Cinematography",
+      title_ar: "التصوير السينمائي",
       works: [
-        { cat: "Commercial", name: "Fashion Brand Shoot" },
-        { cat: "Documentary", name: "Cairo Streets Story" },
-        { cat: "Event", name: "Wedding Cinematography" },
-        { cat: "Lifestyle", name: "Coffee Brand Visual" },
+        { cat: "Commercial", cat_ar: "إعلان تجاري", name: "Fashion Brand Shoot", name_ar: "تصوير براند أزياء", desc: "High-end fashion cinematography with dynamic lighting.", desc_ar: "تصوير سينمائي عالي الجودة لعلامة أزياء مع إضاءة ديناميكية." },
+        { cat: "Documentary", cat_ar: "وثائقي", name: "Cairo Streets Story", name_ar: "قصة شوارع القاهرة", desc: "Raw visual storytelling exploring authentic street culture.", desc_ar: "سرد بصري واقعي يستكشف ثقافة الشارع الأصيلة." },
+        { cat: "Event", cat_ar: "فعاليات", name: "Wedding Cinematography", name_ar: "تصوير حفل زفاف", desc: "Emotional event coverage capturing genuine moments.", desc_ar: "تغطية سينمائية مؤثرة تلتقط اللحظات الحقيقية." },
+        { cat: "Lifestyle", cat_ar: "لايف ستايل", name: "Coffee Brand Visual", name_ar: "إعلان براند قهوة", desc: "Aesthetic macro cinematography highlighting product details.", desc_ar: "تصوير ماكرو جمالي يبرز تفاصيل المنتج." },
       ],
     },
     social: {
       title: "Social Content",
+      title_ar: "محتوى السوشيال",
       works: [
-        { cat: "Reel", name: "Viral Fashion Reel" },
-        { cat: "TikTok", name: "Food Brand Series" },
-        { cat: "Short", name: "Tech Product Demo" },
-        { cat: "Story Pack", name: "Influencer Campaign" },
+        { cat: "Reel", cat_ar: "ريل", name: "Viral Fashion Reel", name_ar: "ريل أزياء واسع الانتشار", desc: "Fast-paced short-form content designed for maximum engagement.", desc_ar: "محتوى قصير سريع الإيقاع مصمم لأعلى معدل تفاعل." },
+        { cat: "TikTok", cat_ar: "تيك توك", name: "Food Brand Series", name_ar: "سلسلة براند مأكولات", desc: "Engaging TikTok series for a food brand.", desc_ar: "سلسلة تيك توك ممتعة لبراند مأكولات." },
+        { cat: "Short", cat_ar: "شورتس", name: "Tech Product Demo", name_ar: "استعراض منتج تقني", desc: "Punchy short video demonstrating key product features.", desc_ar: "فيديو قصير ومباشر يستعرض أهم ميزات المنتج." },
+        { cat: "Story Pack", cat_ar: "ستوريز", name: "Influencer Campaign", name_ar: "حملة صناع المحتوى", desc: "Vertical story campaign built for social platforms.", desc_ar: "حملة ستوريز رأسية مصممة لمنصات التواصل." },
       ],
     },
     documentary: {
       title: "Documentary & Brand",
+      title_ar: "وثائقي وبراند",
       works: [
-        { cat: "Documentary", name: "The Maker Story" },
-        { cat: "Brand Film", name: "Heritage Brand Doc" },
-        { cat: "Profile", name: "Athlete Portrait" },
-        { cat: "Series", name: "Cultural Voices Series" },
+        { cat: "Documentary", cat_ar: "وثائقي", name: "The Maker Story", name_ar: "قصة صانع", desc: "Deep-dive documentary profile celebrating artisanal craft.", desc_ar: "وثائقي عميق يحتفي بالحرفية والإبداع." },
+        { cat: "Brand Film", cat_ar: "فيلم براند", name: "Heritage Brand Doc", name_ar: "وثائقي براند عريق", desc: "Story-driven brand film showcasing origin and values.", desc_ar: "فيلم براند قصصي يستعرض الأصول والقيم." },
+        { cat: "Profile", cat_ar: "بورتريه", name: "Athlete Portrait", name_ar: "بورتريه رياضي", desc: "Inspirational short film following an athlete's journey.", desc_ar: "فيلم قصير ملهم يتابع رحلة رياضي." },
+        { cat: "Series", cat_ar: "سلسلة", name: "Cultural Voices Series", name_ar: "سلسلة أصوات ثقافية", desc: "Multi-part documentary series exploring cultural stories.", desc_ar: "سلسلة وثائقية متعددة الأجزاء تستكشف قصصاً ثقافية." },
       ],
     },
     mentorship: {
       title: "Training & Mentorship",
+      title_ar: "تدريب وإرشاد",
       works: [
-        { cat: "Course", name: "Premiere Pro Masterclass" },
-        { cat: "Workshop", name: "Color Grading Bootcamp" },
-        { cat: "1:1", name: "Portfolio Coaching" },
-        { cat: "Online", name: "Reels Editing Course" },
+        { cat: "Course", cat_ar: "كورس", name: "Premiere Pro Masterclass", name_ar: "ماستر كلاس Premiere Pro", desc: "Comprehensive editing masterclass covering advanced workflows.", desc_ar: "ماستر كلاس شامل في المونتاج يغطي سير العمل المتقدم." },
+        { cat: "Workshop", cat_ar: "ورشة عمل", name: "Color Grading Bootcamp", name_ar: "ورشة تدريج الألوان", desc: "Intensive color grading training in DaVinci Resolve.", desc_ar: "تدريب مكثف على تدريج الألوان في DaVinci Resolve." },
+        { cat: "1:1", cat_ar: "جلسة 1:1", name: "Portfolio Coaching", name_ar: "تقييم البورتفوليو الشخصي", desc: "Personalized 1-on-1 feedback and portfolio optimization.", desc_ar: "جلسة فردية لتقييم وتطوير البورتفوليو." },
+        { cat: "Online", cat_ar: "أونلاين", name: "Reels Editing Course", name_ar: "كورس مونتاج الريلز", desc: "Practical online course focusing on short-form editing.", desc_ar: "كورس أونلاين عملي يركز على مونتاج المحتوى القصير." },
       ],
     },
     motion: {
       title: "Motion & Graphics",
+      title_ar: "موشن جرافيكس",
       works: [
-        { cat: "Logo Reveal", name: "Brand Identity Animation" },
-        { cat: "Title Sequence", name: "Documentary Opener" },
-        { cat: "Lower Thirds", name: "News Show Pack" },
-        { cat: "Explainer", name: "SaaS Product Animation" },
+        { cat: "Logo Reveal", cat_ar: "ظهور الشعار", name: "Brand Identity Animation", name_ar: "تحريك الهوية البصرية", desc: "Sleek motion graphics introducing brand identity.", desc_ar: "موشن جرافيكس أنيق يستعرض الهوية البصرية." },
+        { cat: "Title Sequence", cat_ar: "سلسلة العناوين", name: "Documentary Opener", name_ar: "مقدمة فيلم وثائقي", desc: "Cinematic title animation setting the film's mood.", desc_ar: "تحريك عناوين سينمائي يحدد طابع الفيلم." },
+        { cat: "Lower Thirds", cat_ar: "لوور ثيردز", name: "News Show Pack", name_ar: "حزمة برنامج إخباري", desc: "Clean lower thirds graphic package for broadcasts.", desc_ar: "حزمة موشن جرافيكس احترافية للبث التلفزيوني." },
+        { cat: "Explainer", cat_ar: "فيديو شارح", name: "SaaS Product Animation", name_ar: "تحريك منتج برمجي", desc: "Engaging motion graphic explainer demonstrating product value.", desc_ar: "موشن جرافيكس شارح وممتع يستعرض مميزات البرنامج." },
       ],
     },
   };
@@ -575,60 +581,215 @@ renderFrontendIntroPages();
       const key = card.dataset.service;
       const data = window.serviceWorks[key];
       if (!data) return;
-      modalTitle.textContent = data.title;
+
+      const isAr = document.documentElement.lang === "ar" ||
+                   document.documentElement.dir === "rtl" ||
+                   document.body.classList.contains("ar-mode") ||
+                   (document.getElementById("langBtn") && document.getElementById("langBtn").textContent.trim() === "English") ||
+                   (document.getElementById("floatingLangBtn") && document.getElementById("floatingLangBtn").textContent.trim() === "English");
+
+      const getAr = (str, fallback) => {
+        if (fallback) return fallback;
+        if (!str) return "";
+        const dict = {
+          "Video Editing": "مونتاج الفيديو",
+          "Cinematography": "التصوير السينمائي",
+          "Social Content": "محتوى السوشيال ميديا",
+          "Documentary & Brand": "الأفلام الوثائقية والبراندات",
+          "Training & Mentorship": "التدريب والإرشاد",
+          "Motion & Graphics": "الموشن جرافيكس",
+          "Brand Film": "فيلم براند",
+          "Music Video": "فيديو كليب",
+          "Corporate": "شركات",
+          "Cinematic": "سينمائي",
+          "Commercial": "إعلان تجاري",
+          "Documentary": "وثائقي",
+          "Event": "فعاليات",
+          "Lifestyle": "لايف ستايل",
+          "Reel": "ريل",
+          "TikTok": "تيك توك",
+          "Short": "شورتس",
+          "Story Pack": "ستوريز",
+          "Profile": "بورتريه",
+          "Series": "سلسلة",
+          "Course": "كورس",
+          "Workshop": "ورشة عمل",
+          "1:1": "جلسة 1:1",
+          "Online": "أونلاين",
+          "Logo Reveal": "ظهور الشعار",
+          "Title Sequence": "سلسلة العناوين",
+          "Lower Thirds": "لوور ثيردز",
+          "Explainer": "فيديو شارح",
+          "Tech Launch Video": "فيديو إطلاق منتج تقني",
+          "Indie Artist Reel": "ريل فنان مستقل",
+          "Annual Report Film": "فيلم التقرير السنوي",
+          "Travel Diary 2025": "يوميات سفر ٢٠٢٥",
+          "Fashion Brand Shoot": "تصوير براند أزياء",
+          "Cairo Streets Story": "قصة شوارع القاهرة",
+          "Wedding Cinematography": "تصوير حفل زفاف",
+          "Coffee Brand Visual": "إعلان براند قهوة",
+          "Viral Fashion Reel": "ريل أزياء واسع الانتشار",
+          "Food Brand Series": "سلسلة براند مأكولات",
+          "Tech Product Demo": "استعراض منتج تقني",
+          "Influencer Campaign": "حملة صناع المحتوى",
+          "The Maker Story": "قصة صانع",
+          "Heritage Brand Doc": "وثائقي براند عريق",
+          "Athlete Portrait": "بورتريه رياضي",
+          "Cultural Voices Series": "سلسلة أصوات ثقافية",
+          "Premiere Pro Masterclass": "ماستر كلاس Premiere Pro",
+          "Color Grading Bootcamp": "ورشة تدريج الألوان",
+          "Portfolio Coaching": "تقييم البورتفوليو الشخصي",
+          "Reels Editing Course": "كورس مونتاج الريلز",
+          "Brand Identity Animation": "تحريك الهوية البصرية",
+          "Documentary Opener": "مقدمة فيلم وثائقي",
+          "News Show Pack": "حزمة برنامج إخباري",
+          "SaaS Product Animation": "تحريك منتج برمجي"
+        };
+        return dict[str] || str;
+      };
+
+      const esc = (str) => String(str || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+
+      const modalEyebrow = document.getElementById("modalEyebrow");
+      if (modalEyebrow) {
+        modalEyebrow.textContent = isAr ? "أعمال مختارة" : "Selected Work";
+        modalEyebrow.setAttribute("data-en", "Selected Work");
+        modalEyebrow.setAttribute("data-ar", "أعمال مختارة");
+      }
+
+      const titleAr = getAr(data.title, data.title_ar);
+      const titleText = isAr ? titleAr : (data.title || titleAr);
+      modalTitle.textContent = titleText;
+      modalTitle.setAttribute("data-en", data.title || titleText);
+      modalTitle.setAttribute("data-ar", titleAr);
+
       modalWorks.innerHTML = data.works
         .map(
-          (w) => `
-      <div class="modal-work" ${w.url ? `style="cursor:pointer;" onclick="if(window.openVideoModal) window.openVideoModal('${w.url}', \`${w.name ? w.name.replace(/\`/g, '\\\`') : ''}\`)"` : ''}>
+          (w) => {
+            const catAr = getAr(w.cat, w.cat_ar);
+            const nameAr = getAr(w.name, w.name_ar);
+            const catText = isAr ? catAr : (w.cat || catAr);
+            const nameText = isAr ? nameAr : (w.name || nameAr);
+            return `
+      <div class="modal-work" ${w.url ? `style="cursor:pointer;" onclick="if(window.openVideoModal) window.openVideoModal('${w.url}', \`${(w.name || '').replace(/\`/g, '\\\`')}\`)"` : ''}>
         <div class="modal-work-thumb">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         </div>
         <div class="modal-work-overlay">
           <div>
-            <div class="modal-work-cat">${w.cat}</div>
-            <div class="modal-work-name">${w.name}</div>
+            <div class="modal-work-cat" data-en="${esc(w.cat)}" data-ar="${esc(catAr)}">${esc(catText)}</div>
+            <div class="modal-work-name" data-en="${esc(w.name)}" data-ar="${esc(nameAr)}">${esc(nameText)}</div>
           </div>
         </div>
       </div>
-    `,
+    `;
+          }
         )
         .join("");
       
       // Reset scroll to start
       modalWorks.scrollTo({ left: 0 });
 
+      // ═══ INDEX-BASED MODAL NAVIGATION (RTL-safe) ═══
+      let modalCurrentIndex = 0;
+      const totalSlides = data.works.length;
+
+      const updateDesc = (index) => {
+        const descEl = document.getElementById("modalDescription");
+        if (descEl && data.works[index]) {
+          const w = data.works[index];
+          const descEn = w.desc || "Selected work showcase for this specialization.";
+          const descAr = getAr(w.desc, w.desc_ar) || "عرض نماذج الأعمال المختارة لهذا التخصص.";
+          const descText = isAr ? descAr : descEn;
+          descEl.textContent = descText;
+          descEl.setAttribute("data-en", descEn);
+          descEl.setAttribute("data-ar", descAr);
+        }
+      };
+
       const modalPagination = document.getElementById("modalPagination");
+      let dots = [];
+
+      function goToSlide(index) {
+        if (index < 0) index = 0;
+        if (index >= totalSlides) index = totalSlides - 1;
+        modalCurrentIndex = index;
+
+        // Scroll to the target slide using its actual position (works in both LTR and RTL)
+        const slides = modalWorks.querySelectorAll('.modal-work');
+        if (slides[index]) {
+          slides[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+        }
+
+        // Update dots
+        dots.forEach((d, i) => d.classList.toggle('active', i === index));
+
+        // Update description
+        updateDesc(index);
+      }
+
       if (modalPagination) {
         // Generate dots
         modalPagination.innerHTML = data.works.map((_, i) => `<span class="dot ${i === 0 ? 'active' : ''}" data-index="${i}"></span>`).join("");
         
-        const dots = modalPagination.querySelectorAll('.dot');
+        dots = Array.from(modalPagination.querySelectorAll('.dot'));
         
         // Handle dot clicks
         dots.forEach(dot => {
           dot.addEventListener('click', () => {
             const index = parseInt(dot.dataset.index);
-            modalWorks.scrollTo({ left: index * modalWorks.clientWidth, behavior: 'smooth' });
+            goToSlide(index);
           });
         });
 
-        // Update active dot and description on scroll
+        // Update active dot and description on scroll (works for touch/drag scrolling)
+        let scrollTimeout;
         modalWorks.onscroll = () => {
-          if (!modalWorks.clientWidth) return;
-          const index = Math.round(modalWorks.scrollLeft / modalWorks.clientWidth);
-          dots.forEach((d, i) => d.classList.toggle('active', i === index));
-          
-          const descEl = document.getElementById("modalDescription");
-          if (descEl && data.works[index]) {
-            descEl.textContent = data.works[index].desc || "LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT, SED DO EIUSMOD TEMPOR INCIDIDUNT";
-          }
+          clearTimeout(scrollTimeout);
+          scrollTimeout = setTimeout(() => {
+            if (!modalWorks.clientWidth) return;
+            // Find the closest slide by checking which one is most visible
+            const slides = modalWorks.querySelectorAll('.modal-work');
+            const containerRect = modalWorks.getBoundingClientRect();
+            const containerCenter = containerRect.left + containerRect.width / 2;
+            let closestIndex = 0;
+            let closestDist = Infinity;
+            slides.forEach((slide, i) => {
+              const slideRect = slide.getBoundingClientRect();
+              const slideCenter = slideRect.left + slideRect.width / 2;
+              const dist = Math.abs(slideCenter - containerCenter);
+              if (dist < closestDist) {
+                closestDist = dist;
+                closestIndex = i;
+              }
+            });
+            modalCurrentIndex = closestIndex;
+            dots.forEach((d, i) => d.classList.toggle('active', i === closestIndex));
+            updateDesc(closestIndex);
+          }, 50);
         };
         
         // Initial description update
-        const descEl = document.getElementById("modalDescription");
-        if (descEl && data.works[0]) {
-          descEl.textContent = data.works[0].desc || "LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT, SED DO EIUSMOD TEMPOR INCIDIDUNT";
-        }
+        updateDesc(0);
+      }
+
+      // Wire up arrow buttons
+      const modalArrowLeft = document.getElementById("modalArrowLeft");
+      const modalArrowRight = document.getElementById("modalArrowRight");
+      
+      if (modalArrowLeft) {
+        modalArrowLeft.onclick = () => {
+          const isRTL = document.documentElement.dir === 'rtl' || document.body.classList.contains('ar-mode');
+          // In RTL, visual "left" arrow means go to NEXT index; in LTR it means PREVIOUS
+          goToSlide(isRTL ? modalCurrentIndex + 1 : modalCurrentIndex - 1);
+        };
+      }
+      if (modalArrowRight) {
+        modalArrowRight.onclick = () => {
+          const isRTL = document.documentElement.dir === 'rtl' || document.body.classList.contains('ar-mode');
+          // In RTL, visual "right" arrow means go to PREVIOUS index; in LTR it means NEXT
+          goToSlide(isRTL ? modalCurrentIndex - 1 : modalCurrentIndex + 1);
+        };
       }
 
       modal.classList.add("open");
@@ -1789,6 +1950,27 @@ window.TRAINING_DATA = {
     para2En: 'Available in-person (Cairo) or online.',
     para2Ar: 'متاح حضورياً (القاهرة) أو أونلاين.'
   },
+  whoIsMentor: {
+    eyebrowEn: 'WHO IS',
+    eyebrowAr: 'من هو',
+    titleEn: 'YOUR<br><span>MENTOR?</span>',
+    titleAr: 'مدربـك؟<br><span>كريم عبد العزيز</span>',
+    photos: [
+      'correct-photo.jpeg'
+    ],
+    paragraphs: [
+      {
+        textEn: "Karim Abdelaziz is one of the most recognized film directors and video editors in the Middle East. With over <strong>8 years</strong> of professional experience, he has been responsible for crafting cinematic content, developing brands, and positioning companies as leaders in their industry through powerful visual storytelling.",
+        textAr: "كريم عبد العزيز هو أحد أبرز مخرجي الأفلام ومونتيري الفيديو في الشرق الأوسط. بخبرة مهنية تتجاوز <strong>٨ سنوات</strong>، كان مسؤولاً عن صناعة محتوى سينمائي، تطوير العلامات التجارية، وتمكين الشركات من الريادة في مجالها من خلال السرد البصري القوي.",
+        isBold: false
+      },
+      {
+        textEn: "In total, Karim has delivered more than <strong>1,300 projects</strong>, worked across <strong>14 countries</strong>, and collaborated with brands like <strong>Samsung, CUPRA, 9GAG, Artlist, and Asus</strong> — and now he's ready to bring that same cinematic excellence to <strong class=\"highlight\">your brand</strong>.",
+        textAr: "في المجمل، نفذ كريم أكثر من <strong>١,٣٠٠ مشروع</strong>، وعمل في <strong>١٤ دولة</strong>، وتعاون مع علامات تجارية مثل <strong>Samsung و CUPRA و 9GAG و Artlist و Asus</strong> — وهو الآن مستعد لنقل هذا التميز السينمائي إلى <strong class=\"highlight\">علامتك التجارية</strong>.",
+        isBold: false
+      }
+    ]
+  },
   videos: [
     {
       name: "Student A",
@@ -2609,11 +2791,66 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
+// Who Is Your Mentor photo slider functions
+window.mentorPhotosList = window.mentorPhotosList || ['correct-photo.jpeg'];
+window.mentorPhotoIndex = 0;
+
+window.updateMentorPhotoDisplay = function() {
+  const img = document.getElementById('directorPhotoImg');
+  if (!img) return;
+  const photos = window.mentorPhotosList || ['correct-photo.jpeg'];
+  if (window.mentorPhotoIndex < 0) window.mentorPhotoIndex = photos.length - 1;
+  if (window.mentorPhotoIndex >= photos.length) window.mentorPhotoIndex = 0;
+
+  const curSrc = photos[window.mentorPhotoIndex] || 'correct-photo.jpeg';
+  img.style.opacity = '0.3';
+  setTimeout(() => {
+    img.src = curSrc;
+    img.style.opacity = '1';
+  }, 150);
+
+  const dotsCont = document.getElementById('directorPhotoDots');
+  if (dotsCont) {
+    if (photos.length > 1) {
+      dotsCont.style.display = 'flex';
+      dotsCont.innerHTML = photos.map((_, i) => `
+        <span class="photo-dot ${i === window.mentorPhotoIndex ? 'active' : ''}" onclick="window.setMentorPhoto(${i})"></span>
+      `).join('');
+    } else {
+      dotsCont.style.display = 'none';
+    }
+  }
+};
+
+window.setMentorPhoto = function(index) {
+  window.mentorPhotoIndex = index;
+  window.updateMentorPhotoDisplay();
+};
+
+window.prevMentorPhoto = function() {
+  const photos = window.mentorPhotosList || ['correct-photo.jpeg'];
+  if (photos.length === 0) return;
+  window.mentorPhotoIndex = (window.mentorPhotoIndex - 1 + photos.length) % photos.length;
+  window.updateMentorPhotoDisplay();
+};
+
+window.nextMentorPhoto = function() {
+  const photos = window.mentorPhotosList || ['correct-photo.jpeg'];
+  if (photos.length === 0) return;
+  window.mentorPhotoIndex = (window.mentorPhotoIndex + 1) % photos.length;
+  window.updateMentorPhotoDisplay();
+};
+
 window.renderFrontendTrainingPage = function() {
   const dStr = localStorage.getItem('ka_admin_training_data');
-  if (!dStr) return;
   let d;
-  try { d = JSON.parse(dStr); } catch(e) { return; }
+  if (dStr) {
+    try { d = JSON.parse(dStr); } catch(e) {}
+  }
+  if (!d && window.TRAINING_DATA) {
+    d = window.TRAINING_DATA;
+  }
+  if (!d) return;
   
   const section = document.getElementById('training');
   if (!section) return;
@@ -2682,6 +2919,54 @@ window.renderFrontendTrainingPage = function() {
       `).join('');
     }
   }
+
+  // Render Who Is Your Mentor Section
+  const m = d.whoIsMentor;
+  if (m) {
+    const mentorSec = section.querySelector('.who-is-director-section');
+    if (mentorSec) {
+      const mEyebrow = mentorSec.querySelector('.who-is-director-eyebrow');
+      if (mEyebrow) {
+        if (m.eyebrowEn) mEyebrow.setAttribute('data-en', m.eyebrowEn);
+        if (m.eyebrowAr) mEyebrow.setAttribute('data-ar', m.eyebrowAr);
+        mEyebrow.innerHTML = curLang === 'ar' ? (m.eyebrowAr || m.eyebrowEn || '') : (m.eyebrowEn || m.eyebrowAr || '');
+      }
+
+      const mTitle = mentorSec.querySelector('.who-is-director-title');
+      if (mTitle) {
+        if (m.titleEn) mTitle.setAttribute('data-en', m.titleEn);
+        if (m.titleAr) mTitle.setAttribute('data-ar', m.titleAr);
+        mTitle.innerHTML = curLang === 'ar' ? (m.titleAr || m.titleEn || '') : (m.titleEn || m.titleAr || '');
+      }
+
+      if (m.photos && Array.isArray(m.photos) && m.photos.length > 0) {
+        window.mentorPhotosList = m.photos;
+        if (typeof window.mentorPhotoIndex !== 'number' || window.mentorPhotoIndex >= m.photos.length) {
+          window.mentorPhotoIndex = 0;
+        }
+        window.updateMentorPhotoDisplay();
+      }
+
+      if (m.paragraphs && Array.isArray(m.paragraphs)) {
+        const pCont = mentorSec.querySelector('.who-is-director-content');
+        if (pCont) {
+          const oldParas = pCont.querySelectorAll('.who-is-director-text');
+          oldParas.forEach(el => el.remove());
+
+          m.paragraphs.forEach(p => {
+            const pEl = document.createElement('p');
+            pEl.className = `who-is-director-text ${p.isBold ? 'who-is-director-text-bold' : ''}`;
+            const textEn = p.textEn || '';
+            const textAr = p.textAr || '';
+            pEl.setAttribute('data-en', textEn);
+            pEl.setAttribute('data-ar', textAr);
+            pEl.innerHTML = curLang === 'ar' ? (textAr || textEn) : (textEn || textAr);
+            pCont.appendChild(pEl);
+          });
+        }
+      }
+    }
+  }
 };
 window.renderFrontendTrainingPage();
 
@@ -2691,7 +2976,8 @@ window.addEventListener('DOMContentLoaded', function() {
   var isAdmin = document.body.classList.contains('admin-mode') || window.location.hash === '#admin';
   
   if (window.kaDatabase) {
-    window.kaDatabase.ref('data').once('value').then(function(snapshot) {
+    // Listen in real-time for live global updates for all visitors
+    window.kaDatabase.ref('data').on('value', function(snapshot) {
       var data = snapshot.val();
       if (!data) return;
       
@@ -2700,18 +2986,17 @@ window.addEventListener('DOMContentLoaded', function() {
         var overlay = document.getElementById('maintenanceOverlay');
         if (overlay) {
           overlay.style.display = 'flex';
-          // Hide the loading screen and main content
           var loader = document.getElementById('pageLoader');
           if (loader) loader.style.display = 'none';
           document.body.style.overflow = 'hidden';
         }
-        return; // Don't load the rest of the site
+        return;
       }
       
       // ALWAYS sync Firebase data to localStorage for all visitors
       var needsRerender = false;
       Object.keys(data).forEach(function(key) {
-        if (key === 'ka_maintenance_mode') return; // Skip maintenance flag
+        if (key === 'ka_maintenance_mode') return;
         var currentVal = localStorage.getItem(key);
         var newVal = data[key];
         if (typeof newVal === 'object' && newVal !== null) {
@@ -2723,7 +3008,6 @@ window.addEventListener('DOMContentLoaded', function() {
         }
       });
         
-      // Update home photo
       var savedHomePhoto = data['ka_admin_home_photo'];
       if (savedHomePhoto) {
         var photoBg = document.querySelector('.hero-image .photo-bg');
@@ -2732,22 +3016,15 @@ window.addEventListener('DOMContentLoaded', function() {
         }
       }
         
-      // Re-render all dynamic sections if data changed
       if (needsRerender) {
         if (window.renderFrontendIntroPages) window.renderFrontendIntroPages();
         if (window.renderFrontendTrainingPage) window.renderFrontendTrainingPage();
         if (window.renderFrontendAboutPage) window.renderFrontendAboutPage();
+        if (window.renderFrontendHomePage) window.renderFrontendHomePage();
           
-        // Re-render reviews
         if (typeof renderReviews === 'function') renderReviews();
-          
-        // Re-render works
         if (typeof renderWorksSection === 'function') renderWorksSection();
-          
-        // Re-render provided services
         if (typeof renderProvidedSection === 'function') renderProvidedSection();
-          
-        // Re-render map/stats
         if (typeof renderMapCountries === 'function') renderMapCountries();
         if (typeof renderGlobalStats === 'function') renderGlobalStats();
       }

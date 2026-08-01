@@ -21,7 +21,9 @@
     PROVIDED_DIVIDER1_EN: 'ka_admin_provided_divider1_en',
     PROVIDED_DIVIDER1_AR: 'ka_admin_provided_divider1_ar',
     PROVIDED_DIVIDER2_EN: 'ka_admin_provided_divider2_en',
-    PROVIDED_DIVIDER2_AR: 'ka_admin_provided_divider2_ar'
+    PROVIDED_DIVIDER2_AR: 'ka_admin_provided_divider2_ar',
+    HOME_INTRO_TEXT: 'ka_admin_home_intro_text',
+    HOME_SERVICES: 'ka_admin_home_services'
   };
 
   const DEFAULT_CREDS = {
@@ -246,7 +248,31 @@
     
     const savedWorks = localStorage.getItem(STORAGE_KEYS.WORKS);
     if (savedWorks && window.serviceWorks) {
-      window.serviceWorks = JSON.parse(savedWorks);
+      try {
+        const parsed = JSON.parse(savedWorks);
+        if (parsed && typeof parsed === 'object') {
+          Object.keys(window.serviceWorks).forEach(key => {
+            if (parsed[key]) {
+              parsed[key].title = parsed[key].title || window.serviceWorks[key].title;
+              parsed[key].title_ar = parsed[key].title_ar || window.serviceWorks[key].title_ar;
+              if (Array.isArray(parsed[key].works)) {
+                parsed[key].works.forEach((w, idx) => {
+                  const defW = (window.serviceWorks[key].works && window.serviceWorks[key].works[idx]) || {};
+                  w.cat = w.cat || defW.cat;
+                  w.cat_ar = w.cat_ar || defW.cat_ar;
+                  w.name = w.name || defW.name;
+                  w.name_ar = w.name_ar || defW.name_ar;
+                  w.desc = w.desc || defW.desc;
+                  w.desc_ar = w.desc_ar || defW.desc_ar;
+                });
+              }
+            } else {
+              parsed[key] = window.serviceWorks[key];
+            }
+          });
+          window.serviceWorks = parsed;
+        }
+      } catch(e) {}
     }
 
     const savedSettings = localStorage.getItem(STORAGE_KEYS.SETTINGS);
@@ -268,6 +294,49 @@
        updateSocial('youtube', 'YouTube');
        updateSocial('facebook', 'Facebook');
        updateSocial('tiktok', 'TikTok');
+    }
+  }
+
+  // Apply home page edits from localStorage on page load
+  function applyHomePageData() {
+    const introData = safeJSONParse(localStorage.getItem(STORAGE_KEYS.HOME_INTRO_TEXT), null);
+    if (introData) {
+      const el = document.querySelector('.hero-tagline');
+      if (el) {
+        el.setAttribute('data-en', introData.en);
+        el.setAttribute('data-ar', introData.ar);
+        const isArabic = document.documentElement.getAttribute('dir') === 'rtl';
+        el.innerHTML = isArabic ? introData.ar : introData.en;
+      }
+    }
+    const svcData = safeJSONParse(localStorage.getItem(STORAGE_KEYS.HOME_SERVICES), null);
+    if (svcData) {
+      const grid = document.querySelector('.home-svc-grid');
+      if (grid) {
+        const iconsFn = function(icon) {
+          const icons = {
+            video: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>',
+            camera: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>',
+            document: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
+            music: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>',
+            motion: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+            social: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>',
+            photo: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>',
+            design: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>'
+          };
+          return icons[icon] || icons.video;
+        };
+        const isArabic = document.documentElement.getAttribute('dir') === 'rtl';
+        grid.innerHTML = svcData.map(function(s) {
+          var te = s.titleEn || ''; var ta = s.titleAr || '';
+          var de = s.descEn || ''; var da = s.descAr || '';
+          return '<div class="home-svc-card reveal" onclick="spaGo(\'services\');">' +
+            '<div class="home-svc-icon">' + iconsFn(s.icon) + '</div>' +
+            '<div class="home-svc-title" data-en="' + te.replace(/"/g, '&quot;') + '" data-ar="' + ta.replace(/"/g, '&quot;') + '">' + (isArabic ? ta : te) + '</div>' +
+            '<div class="home-svc-desc" data-en="' + de.replace(/"/g, '&quot;') + '" data-ar="' + da.replace(/"/g, '&quot;') + '">' + (isArabic ? da : de) + '</div>' +
+          '</div>';
+        }).join('');
+      }
     }
   }
 
@@ -327,17 +396,38 @@
     
     if (!saved) return JSON.parse(JSON.stringify(window.TRAINING_DATA || {}));
     
-    // Ensure arrays exist
+    // Ensure arrays and objects exist
     saved.bullets = saved.bullets || (window.TRAINING_DATA ? window.TRAINING_DATA.bullets : []);
     saved.stats = saved.stats || (window.TRAINING_DATA ? window.TRAINING_DATA.stats : []);
     saved.videos = saved.videos || (window.TRAINING_DATA ? window.TRAINING_DATA.videos : []);
     
+    if (!saved.whoIsMentor) {
+      saved.whoIsMentor = (window.TRAINING_DATA && window.TRAINING_DATA.whoIsMentor)
+        ? JSON.parse(JSON.stringify(window.TRAINING_DATA.whoIsMentor))
+        : {
+            eyebrowEn: 'WHO IS',
+            eyebrowAr: 'من هو',
+            titleEn: 'YOUR<br><span>MENTOR?</span>',
+            titleAr: 'مدربـك؟<br><span>كريم عبد العزيز</span>',
+            photos: ['correct-photo.jpeg'],
+            paragraphs: []
+          };
+    }
+    saved.whoIsMentor.photos = saved.whoIsMentor.photos || ['correct-photo.jpeg'];
+    saved.whoIsMentor.paragraphs = saved.whoIsMentor.paragraphs || [];
+
     return saved;
   }
 
   function saveTrainingData(data) {
     localStorage.setItem(STORAGE_KEYS.TRAINING_DATA, JSON.stringify(data));
     window.TRAINING_DATA = data;
+    // Save to Firebase Realtime Database for LIVE GLOBAL SYNC
+    if (window.kaDatabase) {
+      window.kaDatabase.ref('data/' + STORAGE_KEYS.TRAINING_DATA).set(JSON.stringify(data)).catch(function(e) {
+        console.error('Firebase save error (training data):', e);
+      });
+    }
     if(typeof window.renderFrontendTrainingPage === 'function') window.renderFrontendTrainingPage();
   }
 
@@ -352,6 +442,92 @@
   function saveAboutData(data) {
     localStorage.setItem(STORAGE_KEYS.ABOUT_DATA, JSON.stringify(data));
   }
+
+  // --- Home Page Data ---
+  const DEFAULT_HOME_INTRO = {
+    en: 'I edit branded videos that turn <em>viewers into customers.</em> Cinematic craft for brands that need their content to <em>perform</em> — not just look pretty.',
+    ar: 'بعمل فيديوهات براند بتحوّل <em>المشاهدين لعملاء.</em> حرفة سينمائية للبراندات اللي محتاجة محتواها <em>يحقق نتائج</em> — مش بس يبقى جميل.'
+  };
+
+  const DEFAULT_HOME_SERVICES = [
+    { icon: 'video', titleEn: 'Video Editing', titleAr: 'مونتاج الفيديو', descEn: 'Cinematic cuts that turn footage into stories.', descAr: 'مونتاج سينمائي بيحوّل الفيديو لقصص.' },
+    { icon: 'camera', titleEn: 'Cinematography', titleAr: 'التصوير السينمائي', descEn: 'Directing and shooting with a cinematic eye.', descAr: 'إخراج وتصوير بعين سينمائية.' },
+    { icon: 'document', titleEn: 'Brand & Documentary', titleAr: 'براند ووثائقي', descEn: 'Long-form storytelling with real emotion.', descAr: 'سرد طويل بإحساس حقيقي.' }
+  ];
+
+  function loadHomeIntroText() {
+    return safeJSONParse(localStorage.getItem(STORAGE_KEYS.HOME_INTRO_TEXT), JSON.parse(JSON.stringify(DEFAULT_HOME_INTRO)));
+  }
+
+  function saveHomeIntroText(data) {
+    localStorage.setItem(STORAGE_KEYS.HOME_INTRO_TEXT, JSON.stringify(data));
+    applyHomeIntroToFrontend(data);
+    // Save to Firebase for global sync
+    if (window.kaDatabase) {
+      window.kaDatabase.ref('data/' + STORAGE_KEYS.HOME_INTRO_TEXT).set(JSON.stringify(data)).catch(function(e) {
+        console.error('Firebase save error (intro):', e);
+      });
+    }
+  }
+
+  function loadHomeServices() {
+    return safeJSONParse(localStorage.getItem(STORAGE_KEYS.HOME_SERVICES), JSON.parse(JSON.stringify(DEFAULT_HOME_SERVICES)));
+  }
+
+  function saveHomeServices(data) {
+    localStorage.setItem(STORAGE_KEYS.HOME_SERVICES, JSON.stringify(data));
+    applyHomeServicesToFrontend(data);
+    // Save to Firebase for global sync
+    if (window.kaDatabase) {
+      window.kaDatabase.ref('data/' + STORAGE_KEYS.HOME_SERVICES).set(JSON.stringify(data)).catch(function(e) {
+        console.error('Firebase save error (services):', e);
+      });
+    }
+  }
+
+  // --- Apply to Frontend ---
+  function applyHomeIntroToFrontend(data) {
+    const el = document.querySelector('.hero-tagline');
+    if (el && data) {
+      el.setAttribute('data-en', data.en);
+      el.setAttribute('data-ar', data.ar);
+      // Apply based on current language
+      const isArabic = document.documentElement.getAttribute('dir') === 'rtl';
+      el.innerHTML = isArabic ? data.ar : data.en;
+    }
+  }
+
+  function getHomeSvcSvg(icon) {
+    const icons = {
+      video: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>',
+      camera: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>',
+      document: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
+      music: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>',
+      motion: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+      social: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>',
+      photo: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>',
+      design: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>'
+    };
+    return icons[icon] || icons.video;
+  }
+
+  function applyHomeServicesToFrontend(services) {
+    const grid = document.querySelector('.home-svc-grid');
+    if (!grid || !services) return;
+    grid.innerHTML = services.map(s => `
+      <div class="home-svc-card reveal" onclick="spaGo('services');">
+        <div class="home-svc-icon">${getHomeSvcSvg(s.icon)}</div>
+        <div class="home-svc-title" data-en="${esc(s.titleEn)}" data-ar="${esc(s.titleAr)}">${esc(document.documentElement.getAttribute('dir') === 'rtl' ? s.titleAr : s.titleEn)}</div>
+        <div class="home-svc-desc" data-en="${esc(s.descEn)}" data-ar="${esc(s.descAr)}">${esc(document.documentElement.getAttribute('dir') === 'rtl' ? s.descAr : s.descEn)}</div>
+      </div>
+    `).join('');
+  }
+
+  // Expose frontend render function globally so script.js can call it
+  window.renderFrontendHomePage = function() {
+    applyHomeIntroToFrontend(loadHomeIntroText());
+    applyHomeServicesToFrontend(loadHomeServices());
+  };
 
   function exportAllData() {
     const data = {
@@ -409,7 +585,8 @@
         analytics: 'Analytics',
         settings: 'Settings',
         'intro-pages': 'Intro Pages',
-        'training-pages': 'Training Pages'
+        'training-pages': 'Training Pages',
+        'home-page-edit': 'Home Page'
       };
       titleEl.innerText = pageTitles[page] || page.charAt(0).toUpperCase() + page.slice(1);
     }
@@ -430,9 +607,115 @@
     else if (page === 'settings') renderSettingsPage();
     else if (page === 'training-pages') renderTrainingPageAdmin();
     else if (page === 'about') renderAboutPage();
+    else if (page === 'home-page-edit') renderHomePageEditAdmin();
   }
 
   // ═══ CONTROLLERS ═══
+
+  // --- Home Page Edit Admin ---
+  function renderHomePageEditAdmin() {
+    // Load intro text
+    const intro = loadHomeIntroText();
+    const enEditor = getEl('adminHomeIntroTextEn');
+    const arEditor = getEl('adminHomeIntroTextAr');
+    if (enEditor) enEditor.innerHTML = intro.en || '';
+    if (arEditor) arEditor.innerHTML = intro.ar || '';
+
+    // Render services list
+    renderHomeServicesList();
+  }
+
+  function renderHomeServicesList() {
+    const list = getEl('adminHomeSvcList');
+    if (!list) return;
+    const services = loadHomeServices();
+    if (!services || services.length === 0) {
+      list.innerHTML = '<p class="admin-empty-state">No service cards. Click "Add Card" to create one.</p>';
+      return;
+    }
+    list.innerHTML = services.map((s, i) => `
+      <div class="admin-activity-item">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="admin-svc-icon-preview">${getHomeSvcSvg(s.icon)}</div>
+          <div>
+            <strong>${esc(s.titleEn)}</strong><br>
+            <span style="font-size:12px;color:var(--muted);">${esc(s.descEn)}</span>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="admin-edit-btn" onclick="adminApp.editHomeSvc(${i})">Edit</button>
+          <button class="admin-delete-btn" onclick="adminApp.deleteHomeSvc(${i})">Delete</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function openHomeSvcModal(index) {
+    const modal = getEl('adminHomeSvcModal');
+    if (!modal) return;
+    const services = loadHomeServices();
+
+    getEl('adminHomeSvcEditIndex').value = index;
+    getEl('adminHomeSvcModalTitle').innerText = index >= 0 ? 'Edit Service Card' : 'Add Service Card';
+
+    if (index >= 0 && services[index]) {
+      const s = services[index];
+      getEl('adminHomeSvcIcon').value = s.icon || 'video';
+      getEl('adminHomeSvcTitleEn').value = s.titleEn || '';
+      getEl('adminHomeSvcTitleAr').value = s.titleAr || '';
+      getEl('adminHomeSvcDescEn').value = s.descEn || '';
+      getEl('adminHomeSvcDescAr').value = s.descAr || '';
+    } else {
+      getEl('adminHomeSvcIcon').value = 'video';
+      ['adminHomeSvcTitleEn', 'adminHomeSvcTitleAr', 'adminHomeSvcDescEn', 'adminHomeSvcDescAr'].forEach(id => getEl(id).value = '');
+    }
+    modal.classList.add('active');
+  }
+
+  function wrapSelectionBold(editorId) {
+    const editor = getEl(editorId);
+    if (!editor) return;
+    const sel = window.getSelection();
+    if (!sel.rangeCount || sel.isCollapsed) {
+      showToast('Please select some text first', 'error');
+      return;
+    }
+    const range = sel.getRangeAt(0);
+    if (!editor.contains(range.commonAncestorContainer)) {
+      showToast('Please select text inside the box', 'error');
+      return;
+    }
+
+    // Extract contents and wrap in <em>
+    const em = document.createElement('em');
+    em.appendChild(range.extractContents());
+    range.insertNode(em);
+
+    // Clean up empty nodes
+    editor.normalize();
+  }
+
+  function unwrapSelectionBold(editorId) {
+    const editor = getEl(editorId);
+    if (!editor) return;
+    const sel = window.getSelection();
+    if (!sel.rangeCount) return;
+    const range = sel.getRangeAt(0);
+    if (!editor.contains(range.commonAncestorContainer)) return;
+
+    // Remove any em/b/strong tags in or wrapping selection
+    let node = sel.anchorNode;
+    while (node && node !== editor) {
+      if (node.nodeName === 'EM' || node.nodeName === 'B' || node.nodeName === 'STRONG') {
+        const parent = node.parentNode;
+        while (node.firstChild) parent.insertBefore(node.firstChild, node);
+        parent.removeChild(node);
+        break;
+      }
+      node = node.parentNode;
+    }
+    editor.normalize();
+  }
 
   // --- About Page Admin ---
   let currentAboutTab = 'chapters';
@@ -933,6 +1216,61 @@
     renderTrainingBullets();
     renderTrainingStats();
     renderTrainingVideos();
+    renderAdminMentorPhotos();
+    renderAdminMentorParagraphs();
+  }
+
+  function renderAdminMentorPhotos() {
+    const d = loadTrainingData();
+    const list = getEl('adminMentorPhotosList');
+    if(!list) return;
+    const photos = (d.whoIsMentor && d.whoIsMentor.photos) ? d.whoIsMentor.photos : [];
+    if (photos.length === 0) {
+      list.innerHTML = `<div style="color:var(--admin-text-muted); font-size:13px; padding:12px; background:rgba(255,255,255,0.02); border-radius:8px;">No photos added yet. Add a photo file or URL above.</div>`;
+      return;
+    }
+    list.innerHTML = photos.map((p, i) => `
+      <div class="mentor-photo-admin-card" style="display:flex; align-items:center; gap:12px; background:rgba(255,255,255,0.04); padding:10px; border-radius:10px; border:1px solid var(--admin-border-light); margin-bottom:8px;">
+        <img src="${p}" style="width:60px; height:75px; object-fit:cover; border-radius:8px; background:#000;" alt="Mentor Photo ${i+1}">
+        <div style="flex:1; min-width:0;">
+          <div style="font-size:13px; font-weight:600; color:var(--admin-text);">Photo #${i+1}</div>
+          <div style="font-size:11px; color:var(--admin-text-muted); text-overflow:ellipsis; overflow:hidden; white-space:nowrap; max-width:240px;">${p}</div>
+        </div>
+        <div style="display:flex; align-items:center; gap:6px;">
+          ${i > 0 ? `<button type="button" class="admin-btn-secondary" style="padding:4px 8px; font-size:12px;" onclick="window.adminApp.moveMentorPhoto(${i}, -1)">▲</button>` : ''}
+          ${i < photos.length - 1 ? `<button type="button" class="admin-btn-secondary" style="padding:4px 8px; font-size:12px;" onclick="window.adminApp.moveMentorPhoto(${i}, 1)">▼</button>` : ''}
+          <button type="button" class="admin-btn-secondary" style="color:#ff4444; border-color:#ff4444; padding:4px 10px; font-size:12px;" onclick="window.adminApp.deleteMentorPhoto(${i})">Delete</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function renderAdminMentorParagraphs() {
+    const d = loadTrainingData();
+    const list = getEl('adminMentorParasList');
+    if(!list) return;
+    const paras = (d.whoIsMentor && d.whoIsMentor.paragraphs) ? d.whoIsMentor.paragraphs : [];
+    if (paras.length === 0) {
+      list.innerHTML = `<div style="color:var(--admin-text-muted); font-size:13px; padding:12px; background:rgba(255,255,255,0.02); border-radius:8px;">No paragraphs added yet. Click "Add Paragraph" above to create one.</div>`;
+      return;
+    }
+    list.innerHTML = paras.map((p, i) => `
+      <div class="admin-list-item" style="flex-direction:column; align-items:stretch; gap:10px; margin-bottom:10px;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <strong style="font-size:14px; color:var(--admin-accent);">Paragraph #${i+1}</strong>
+          <div style="display:flex; align-items:center; gap:6px;">
+            ${i > 0 ? `<button type="button" class="admin-btn-secondary" style="padding:4px 8px; font-size:12px;" onclick="window.adminApp.moveMentorPara(${i}, -1)">▲</button>` : ''}
+            ${i < paras.length - 1 ? `<button type="button" class="admin-btn-secondary" style="padding:4px 8px; font-size:12px;" onclick="window.adminApp.moveMentorPara(${i}, 1)">▼</button>` : ''}
+            <button type="button" class="admin-edit-btn" style="padding:4px 10px; font-size:12px;" onclick="window.adminApp.openMentorParaModal(${i})">Edit</button>
+            <button type="button" class="admin-btn-secondary" style="color:#ff4444; border-color:#ff4444; padding:4px 10px; font-size:12px;" onclick="window.adminApp.deleteMentorPara(${i})">Delete</button>
+          </div>
+        </div>
+        <div style="font-size:13px; line-height:1.5; color:var(--admin-text); background:rgba(0,0,0,0.2); padding:10px; border-radius:6px;">
+          <div style="margin-bottom:4px;"><strong>EN:</strong> ${p.textEn}</div>
+          <div dir="rtl" style="color:var(--admin-text-muted);"><strong>AR:</strong> ${p.textAr}</div>
+        </div>
+      </div>
+    `).join('');
   }
 
   function renderTrainingBullets() {
@@ -1007,6 +1345,7 @@
     d.videoHeadingAr = getEl('adminTrainingVideoHeadingAr').value;
     d.videoSubEn = getEl('adminTrainingVideoSubEn').value;
     d.videoSubAr = getEl('adminTrainingVideoSubAr').value;
+
     saveTrainingData(d);
     showToast('Training main settings saved');
   }
@@ -1056,6 +1395,138 @@
 
   window.adminApp = window.adminApp || {};
   window.adminApp.editTrainingVideo = openTrainingVideoModal;
+
+  window.adminApp.openMentorParaModal = function(index = -1) {
+    const modal = getEl('adminMentorParaModal');
+    if(!modal) return;
+    const d = loadTrainingData();
+    const p = (index >= 0 && d.whoIsMentor && d.whoIsMentor.paragraphs) ? d.whoIsMentor.paragraphs[index] : null;
+
+    getEl('mentorParaEditIndex').value = index;
+    getEl('mentorParaModalTitle').innerText = index >= 0 ? 'Edit Mentor Paragraph' : 'Add Mentor Paragraph';
+    
+    const enEditor = getEl('mentorParaTextEn');
+    const arEditor = getEl('mentorParaTextAr');
+    if (enEditor) enEditor.innerHTML = p ? (p.textEn || '') : '';
+    if (arEditor) arEditor.innerHTML = p ? (p.textAr || '') : '';
+
+    modal.classList.add('active');
+  };
+
+  window.adminApp.saveMentorPara = function() {
+    const index = parseInt(getEl('mentorParaEditIndex').value);
+    const enEditor = getEl('mentorParaTextEn');
+    const arEditor = getEl('mentorParaTextAr');
+
+    let textEn = enEditor ? enEditor.innerHTML : '';
+    let textAr = arEditor ? arEditor.innerHTML : '';
+
+    // Standardize <b> tags to <strong>
+    textEn = textEn.replace(/<b\b[^>]*>(.*?)<\/b>/gi, '<strong>$1</strong>');
+    textAr = textAr.replace(/<b\b[^>]*>(.*?)<\/b>/gi, '<strong>$1</strong>');
+
+    const cleanEn = (enEditor ? (enEditor.innerText || enEditor.textContent) : '').trim();
+    const cleanAr = (arEditor ? (arEditor.innerText || arEditor.textContent) : '').trim();
+
+    if(!cleanEn || !cleanAr) {
+      showToast('Please enter both English and Arabic text', true);
+      return;
+    }
+
+    const d = loadTrainingData();
+    d.whoIsMentor = d.whoIsMentor || {};
+    d.whoIsMentor.paragraphs = d.whoIsMentor.paragraphs || [];
+
+    const paraObj = { textEn, textAr };
+
+    if (index >= 0) {
+      d.whoIsMentor.paragraphs[index] = paraObj;
+    } else {
+      d.whoIsMentor.paragraphs.push(paraObj);
+    }
+
+    saveTrainingData(d);
+    renderAdminMentorParagraphs();
+    getEl('adminMentorParaModal').classList.remove('active');
+    showToast(index >= 0 ? 'Paragraph updated globally' : 'Paragraph added globally');
+  };
+
+  window.adminApp.deleteMentorPara = async function(index) {
+    const ok = await showConfirm('Delete Paragraph', 'Are you sure you want to delete this paragraph?');
+    if(!ok) return;
+    const d = loadTrainingData();
+    if(d.whoIsMentor && d.whoIsMentor.paragraphs) {
+      d.whoIsMentor.paragraphs.splice(index, 1);
+      saveTrainingData(d);
+      renderAdminMentorParagraphs();
+      showToast('Paragraph deleted globally');
+    }
+  };
+
+  window.adminApp.moveMentorPara = function(index, dir) {
+    const d = loadTrainingData();
+    if (!d.whoIsMentor || !d.whoIsMentor.paragraphs) return;
+    const targetIdx = index + dir;
+    if (targetIdx < 0 || targetIdx >= d.whoIsMentor.paragraphs.length) return;
+    const temp = d.whoIsMentor.paragraphs[index];
+    d.whoIsMentor.paragraphs[index] = d.whoIsMentor.paragraphs[targetIdx];
+    d.whoIsMentor.paragraphs[targetIdx] = temp;
+    saveTrainingData(d);
+    renderAdminMentorParagraphs();
+  };
+
+  window.adminApp.deleteMentorPhoto = async function(index) {
+    const ok = await showConfirm('Delete Photo', 'Are you sure you want to delete this mentor photo?');
+    if(!ok) return;
+    const d = loadTrainingData();
+    if(d.whoIsMentor && d.whoIsMentor.photos) {
+      d.whoIsMentor.photos.splice(index, 1);
+      saveTrainingData(d);
+      renderAdminMentorPhotos();
+      showToast('Photo deleted globally');
+    }
+  };
+
+  window.adminApp.moveMentorPhoto = function(index, dir) {
+    const d = loadTrainingData();
+    if (!d.whoIsMentor || !d.whoIsMentor.photos) return;
+    const targetIdx = index + dir;
+    if (targetIdx < 0 || targetIdx >= d.whoIsMentor.photos.length) return;
+    const temp = d.whoIsMentor.photos[index];
+    d.whoIsMentor.photos[index] = d.whoIsMentor.photos[targetIdx];
+    d.whoIsMentor.photos[targetIdx] = temp;
+    saveTrainingData(d);
+    renderAdminMentorPhotos();
+  };
+
+  window.adminApp.toggleRichTextBold = function(editorId, makeBold) {
+    const editor = getEl(editorId);
+    if (!editor) return;
+
+    editor.focus();
+    const sel = window.getSelection();
+    if (!sel.rangeCount || sel.isCollapsed) {
+      showToast('Please select text inside the box first', true);
+      return;
+    }
+
+    const range = sel.getRangeAt(0);
+    if (!editor.contains(range.commonAncestorContainer)) {
+      showToast('Please select text inside the box', true);
+      return;
+    }
+
+    if (makeBold) {
+      document.execCommand('bold', false, null);
+    } else {
+      const isBold = document.queryCommandState('bold');
+      if (isBold) {
+        document.execCommand('bold', false, null);
+      } else {
+        document.execCommand('removeFormat', false, null);
+      }
+    }
+  };
 
   window.adminApp.editTrainingBullet = function(index) {
     const d = loadTrainingData();
@@ -1970,6 +2441,7 @@
   async function initAdmin() {
     await initAuth();
     loadData();
+    applyHomePageData();
     
     // Live Sync Toggle Init
     const liveSyncToggle = getEl('adminLiveSyncToggle');
@@ -2083,6 +2555,50 @@
       });
     });
 
+    // Home Page Edit Listeners
+    if(getEl('adminSaveHomeIntroText')) {
+      getEl('adminSaveHomeIntroText').addEventListener('click', () => {
+        let en = getEl('adminHomeIntroTextEn').innerHTML || '';
+        let ar = getEl('adminHomeIntroTextAr').innerHTML || '';
+
+        // Standardize <b> or <strong> to <em>
+        en = en.replace(/<\/?(b|strong)>/gi, function(match) { return match.indexOf('/') !== -1 ? '</em>' : '<em>'; });
+        ar = ar.replace(/<\/?(b|strong)>/gi, function(match) { return match.indexOf('/') !== -1 ? '</em>' : '<em>'; });
+
+        // Strip unexpected HTML tags except <em> and </em>
+        en = en.replace(/<(?!\/?em>)[^>]+>/gi, '');
+        ar = ar.replace(/<(?!\/?em>)[^>]+>/gi, '');
+
+        if(!en.trim()) return showToast('Please enter English text', 'error');
+        saveHomeIntroText({ en: en.trim(), ar: ar.trim() || en.trim() });
+        showToast('Intro text saved globally!');
+      });
+    }
+    if(getEl('introTextBoldBtnEn')) getEl('introTextBoldBtnEn').addEventListener('click', () => wrapSelectionBold('adminHomeIntroTextEn'));
+    if(getEl('introTextNormalBtnEn')) getEl('introTextNormalBtnEn').addEventListener('click', () => unwrapSelectionBold('adminHomeIntroTextEn'));
+    if(getEl('introTextBoldBtnAr')) getEl('introTextBoldBtnAr').addEventListener('click', () => wrapSelectionBold('adminHomeIntroTextAr'));
+    if(getEl('introTextNormalBtnAr')) getEl('introTextNormalBtnAr').addEventListener('click', () => unwrapSelectionBold('adminHomeIntroTextAr'));
+    if(getEl('adminAddHomeSvcBtn')) getEl('adminAddHomeSvcBtn').addEventListener('click', () => openHomeSvcModal(-1));
+    if(getEl('adminSaveHomeSvc')) {
+      getEl('adminSaveHomeSvc').addEventListener('click', () => {
+        const index = parseInt(getEl('adminHomeSvcEditIndex').value);
+        const icon = getEl('adminHomeSvcIcon').value;
+        const titleEn = getEl('adminHomeSvcTitleEn').value;
+        const titleAr = getEl('adminHomeSvcTitleAr').value;
+        const descEn = getEl('adminHomeSvcDescEn').value;
+        const descAr = getEl('adminHomeSvcDescAr').value;
+        if(!titleEn) return showToast('Please enter a title', 'error');
+        const services = loadHomeServices();
+        const svc = { icon, titleEn, titleAr: titleAr || titleEn, descEn, descAr: descAr || descEn };
+        if (index >= 0) services[index] = svc;
+        else services.push(svc);
+        saveHomeServices(services);
+        renderHomeServicesList();
+        getEl('adminHomeSvcModal').classList.remove('active');
+        showToast(index >= 0 ? 'Service card updated globally!' : 'Service card added globally!');
+      });
+    }
+
     // Training Pages Listeners
     if(getEl('adminSaveTrainingPage')) getEl('adminSaveTrainingPage').addEventListener('click', saveTrainingMain);
     if(getEl('adminAddTrainingVideoBtn')) getEl('adminAddTrainingVideoBtn').addEventListener('click', () => openTrainingVideoModal(-1));
@@ -2147,6 +2663,42 @@
         getEl('adminTrainingStatLabelEn').value = '';
         getEl('adminTrainingStatLabelAr').value = '';
         showToast(index >= 0 ? 'Stat updated' : 'Stat added');
+      });
+    }
+
+    // Mentor Section Listeners
+    if(getEl('adminAddMentorPhotoBtn')) {
+      getEl('adminAddMentorPhotoBtn').addEventListener('click', () => {
+        const urlInput = getEl('adminMentorPhotoUrl');
+        const url = urlInput ? urlInput.value.trim() : '';
+        if(!url) return showToast('Please enter an Image URL or choose a file', true);
+        const d = loadTrainingData();
+        d.whoIsMentor = d.whoIsMentor || {};
+        d.whoIsMentor.photos = d.whoIsMentor.photos || [];
+        d.whoIsMentor.photos.push(url);
+        saveTrainingData(d);
+        renderAdminMentorPhotos();
+        if(urlInput) urlInput.value = '';
+        showToast('Mentor photo added globally');
+      });
+    }
+
+    if(getEl('adminMentorPhotoFile')) {
+      getEl('adminMentorPhotoFile').addEventListener('change', (e) => {
+        const file = e.target.files && e.target.files[0];
+        if(!file) return;
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          const dataUrl = evt.target.result;
+          const d = loadTrainingData();
+          d.whoIsMentor = d.whoIsMentor || {};
+          d.whoIsMentor.photos = d.whoIsMentor.photos || [];
+          d.whoIsMentor.photos.push(dataUrl);
+          saveTrainingData(d);
+          renderAdminMentorPhotos();
+          showToast('Mentor photo uploaded and saved globally');
+        };
+        reader.readAsDataURL(file);
       });
     }
 
@@ -2422,7 +2974,17 @@
       deleteProvided: deleteProvidedService,
       deleteProvidedRow3: deleteProvidedServiceRow3,
       deleteCountry,
-      deleteAnalyticsEntry
+      deleteAnalyticsEntry,
+      editHomeSvc: openHomeSvcModal,
+      deleteHomeSvc: async function(index) {
+        const ok = await showConfirm('Delete Card', 'Are you sure you want to delete this service card?');
+        if(!ok) return;
+        const services = loadHomeServices();
+        services.splice(index, 1);
+        saveHomeServices(services);
+        renderHomeServicesList();
+        showToast('Service card deleted');
+      }
     });
     
     // Set user display
