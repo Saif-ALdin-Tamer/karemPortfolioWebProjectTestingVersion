@@ -1,0 +1,155 @@
+:root {
+  --bar:       rgba(11, 18, 33, 0.95);
+  --bar-hi:    rgba(14, 21, 38, 0.88);
+  --bar-lo:    rgba(11, 18, 33, 0.95);
+  --icon-off:  rgba(255, 255, 255, 0.70);
+  --icon-on:   #ffffff;
+
+  --glow-rgb:  56 189 248;
+  --glow:      rgb(var(--glow-rgb));
+
+  --dock-r:    100px;
+  --bead-d:    56px;
+  --bead-cy:   0px;
+  --rise:      42px;
+}
+
+
+
+.dock {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  flex: none;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+  background: none;
+  border-radius: var(--dock-r);
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+}
+
+.dock__cast {
+  position: absolute;
+  inset: 46% 7% 6% 7%;
+  border-radius: 999px;
+  background: var(--bar);
+  box-shadow:
+    0 10px 22px -8px rgba(0, 0, 0, .6),
+    0 32px 56px -20px rgba(0, 0, 0, .7);
+}
+
+.dock__skin {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .4));
+}
+
+.dock__fill {
+  fill: url(#mnPlate);
+  stroke: url(#mnRim);
+  stroke-width: 1;
+}
+.dock__plate-hi { stop-color: var(--bar-hi); }
+.dock__plate-lo { stop-color: var(--bar-lo); }
+.dock__rim-hi { stop-color: rgba(45, 75, 125, 0.35); stop-opacity: 1; }
+.dock__rim-lo { stop-color: rgba(45, 75, 125, 0.35); stop-opacity: 1; }
+
+.dock__bead {
+  position: absolute;
+  top: var(--bead-cy);
+  left: 0;
+  width: var(--bead-d);
+  height: var(--bead-d);
+  margin: calc(var(--bead-d) / -2) 0 0 calc(var(--bead-d) / -2);
+  border-radius: 50%;
+  background: linear-gradient(168deg, color-mix(in srgb, var(--glow) 76%, #fff), var(--glow) 62%);
+  box-shadow:
+    0 0 0 1px rgb(var(--glow-rgb) / .5),
+    0 0 26px 2px rgb(var(--glow-rgb) / .32),
+    0 10px 18px -7px rgba(0, 0, 0, .68),
+    inset 0 0 0 1px rgba(255, 255, 255, .42),
+    inset 0 -3px 6px -3px rgba(26, 16, 34, .18);
+  will-change: transform;
+  pointer-events: none;
+}
+.dock:not(.is-ready) .dock__bead { opacity: 0; }
+
+.dock__tabs {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  padding-inline: clamp(26px, 10.5%, 54px);
+}
+
+.tab {
+  position: relative;
+  flex: 1;
+  display: block;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  border-radius: 14px;
+  --t: 0;
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--acc);
+  outline-offset: -3px;
+}
+
+.tab__icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 25px;
+  height: 25px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  color: color-mix(in oklab, var(--icon-off) calc((1 - var(--t)) * 100%), var(--icon-on));
+  transform: translateY(calc(var(--t) * var(--rise) * -1));
+  will-change: transform;
+  transition: color 0.15s ease-out;
+}
+
+.tab__label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 14%;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  color: var(--acc);
+  opacity: 0;
+  transform: translateY(calc((1 - var(--t)) * 7px));
+  pointer-events: none;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.tab[aria-selected="true"] .tab__label,
+.dock.is-dragging .tab__label { opacity: var(--t); }
+
+@media (max-width: 400px) {
+  .tab__icon { width: 23px; height: 23px; }
+  .tab__label { font-size: 10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+}

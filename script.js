@@ -1291,14 +1291,24 @@ renderFrontendIntroPages();
 
   // ═══════ REVEAL ON SCROLL ═══════
   const obs = new IntersectionObserver(
-    (entries) => {
+    (entries, observer) => {
       entries.forEach((e) => {
-        if (e.isIntersecting) e.target.classList.add("in");
+        if (e.isIntersecting) {
+          e.target.classList.add("in");
+          observer.unobserve(e.target);
+        }
       });
     },
-    { threshold: 0.15 },
+    { threshold: 0, rootMargin: "100px 0px 100px 0px" },
   );
-  document.querySelectorAll(".reveal").forEach((el) => obs.observe(el));
+  document.querySelectorAll(".reveal").forEach((el) => {
+    // If element is already in active section or in viewport, add .in immediately
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight + 200) {
+      el.classList.add("in");
+    }
+    obs.observe(el);
+  });
 
   // ═══════ NAV SCROLL ═══════
   const nav = document.getElementById("nav");
@@ -1332,6 +1342,7 @@ window.enterSite = function () {
     document.getElementById("welcome-section").classList.add("hidden");
     document.getElementById("portfolio-section").classList.add("visible");
     body.classList.add("in-portfolio");
+    document.querySelectorAll("#portfolio-section .reveal").forEach((el) => el.classList.add("in"));
     window.scrollTo(0, 0);
 
     // Fade out overlay

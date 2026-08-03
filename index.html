@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GKEKKX1CV1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-GKEKKX1CV1', { 'debug_mode': true });
-</script>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
 <title>Karim Abdelaziz — Film Director & Video Editor | Cairo</title>
@@ -134,6 +125,39 @@
       line-height: 1.65 !important;
     }
   }
+</style>
+<style id='liquid-nav-style'>
+:root {
+  --bar:       rgba(11, 18, 33, 0.95);
+  --bar-hi:    rgba(14, 21, 38, 0.88);
+  --bar-lo:    rgba(11, 18, 33, 0.95);
+  --icon-off:  rgba(255, 255, 255, 0.70);
+  --icon-on:   #ffffff;
+  --glow-rgb:  56 189 248;
+  --glow:      rgb(var(--glow-rgb));
+  --dock-r:    100px;
+  --bead-d:    56px;
+  --bead-cy:   0px;
+  --rise:      42px;
+}
+.dock { position: relative; width: 100%; height: 50px; flex: none; touch-action: pan-y; -webkit-tap-highlight-color: transparent; background: none; border-radius: var(--dock-r); backdrop-filter: blur(24px) saturate(200%); -webkit-backdrop-filter: blur(24px) saturate(200%); box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6); }
+.dock__cast { position: absolute; inset: 46% 7% 6% 7%; border-radius: 999px; background: rgba(6, 10, 18, 0.6); box-shadow: 0 10px 22px -8px rgba(0, 0, 0, .6), 0 32px 56px -20px rgba(0, 0, 0, .7); }
+.dock__skin { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .4)); }
+.dock__fill { fill: url(#mnPlate); stroke: url(#mnRim); stroke-width: 1; }
+.dock__plate-hi { stop-color: var(--bar-hi); }
+.dock__plate-lo { stop-color: var(--bar-lo); }
+.dock__rim-hi { stop-color: rgba(45, 75, 125, 0.35); stop-opacity: 1; }
+.dock__rim-lo { stop-color: rgba(45, 75, 125, 0.35); stop-opacity: 1; }
+.dock__bead { display: none !important; position: absolute; top: 0; left: 0; width: var(--bead-d); height: var(--bead-d); margin: 0; border-radius: 50%; background: linear-gradient(168deg, color-mix(in srgb, var(--glow) 76%, #fff), var(--glow) 62%); box-shadow: 0 0 0 1px rgb(var(--glow-rgb) / .5), 0 0 26px 2px rgb(var(--glow-rgb) / .32), 0 10px 18px -7px rgba(0, 0, 0, .68), inset 0 0 0 1px rgba(255, 255, 255, .42), inset 0 -3px 6px -3px rgba(26, 16, 34, .18); will-change: transform; pointer-events: none; }
+.dock:not(.is-ready) .dock__bead { opacity: 0; }
+.dock__tabs { position: absolute; inset: 0; display: flex; padding-inline: clamp(26px, 10.5%, 54px); }
+.tab { position: relative; flex: 1; display: block; height: 100%; padding: 0; border: 0; background: none; font: inherit; color: inherit; cursor: pointer; border-radius: 14px; --t: 0; }
+.tab:focus-visible { outline: 2px solid var(--acc); outline-offset: -3px; }
+.tab__icon { position: absolute; left: 50%; top: 50%; width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; color: color-mix(in oklab, var(--icon-off) calc((1 - var(--t)) * 100%), var(--icon-on)); transform: translate(-50%, -50%) translateY(calc(var(--t) * var(--rise) * -1)); will-change: transform; transition: color 0.15s ease-out; }
+.tab__label { position: absolute; left: 0; right: 0; bottom: 10%; font-size: 10px; font-weight: 600; letter-spacing: .06em; color: #ffffff; opacity: 0; transform: translateY(calc((1 - var(--t)) * 7px)); pointer-events: none; white-space: nowrap; text-align: center; }
+.tab[aria-selected="true"] .tab__label, .dock.is-dragging .tab__label { opacity: var(--t); }
+@media (max-width: 400px) { .tab__icon { width: 23px; height: 23px; } .tab__label { font-size: 10px; } }
+@media (prefers-reduced-motion: reduce) { * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; } }
 </style>
 </head>
 <body>
@@ -260,39 +284,82 @@
 <div class="orb orb-2"></div>
 <div class="orb orb-3"></div>
 
+
+
 <!-- NAV -->
-<nav id="nav">
-  <a href="#" class="nav-logo" onclick="spaGo('home');return false;">KA</a>
-  <ul class="nav-links" id="navLinks">
-    <li class="mobile-nav-close" style="display: none;">
-      <a href="#" class="nav-cta" onclick="document.getElementById('navLinks').classList.remove('mobile-open'); document.body.style.overflow = ''; return false;" style="width: 100%; justify-content: center;">
-        <span data-en="Back to page" data-ar="العودة للصفحة">Back to page</span>
-      </a>
-    </li>
-    <li><a href="#home" onclick="spaGo('home');return false;" data-spa="home" data-en="Home" data-ar="الرئيسية">Home</a></li>
-    <li><a href="#about" onclick="spaGo('about');return false;" data-spa="about" data-en="About" data-ar="عني">About</a></li>
-    <li><a href="#services" onclick="spaGo('services');return false;" data-spa="services" data-en="Services" data-ar="خدماتي">Services</a></li>
-    <li><a href="#training" onclick="spaGo('training');return false;" data-spa="training" data-en="Training" data-ar="التدريب">Training</a></li>
-    <li><a href="#contact" onclick="spaGo('contact');return false;" data-spa="contact" data-en="Contact" data-ar="تواصل">Contact</a></li>
-    <li class="mobile-nav-actions">
-      <button class="nav-lang" id="mobileLangBtn">العربية</button>
-      <a href="#" onclick="openQuickBrief();return false;" class="nav-cta">
-        <span data-en="Book a Call" data-ar="احجز مكالمة">Book a Call</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
-      </a>
-    </li>
-  </ul>
-  <div class="nav-actions">
-    <button class="nav-lang" id="portfolioLangBtn">العربية</button>
-    <a href="#" onclick="openQuickBrief();return false;" class="nav-cta">
+<div class="nav-wrapper" style="position:fixed; top:40px; left:50%; transform:translateX(-50%); z-index:999; display:flex; gap:12px; align-items:center;">
+<!-- The Liquid Dock -->
+  <div class="dock" id="dock" style="pointer-events: auto; width: 480px; margin: 0; border-radius: 100px; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5); height: 50px;">
+    <span class="dock__cast" aria-hidden="true"></span>
+    <svg class="dock__skin" id="skin" aria-hidden="true" focusable="false" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="mnPlate" x1="0" y1="0" x2="0" y2="1">
+          <stop class="dock__plate-hi" offset="0" />
+          <stop class="dock__plate-lo" offset="1" />
+        </linearGradient>
+        <linearGradient id="mnRim" x1="0" y1="0" x2="0" y2="1">
+          <stop class="dock__rim-hi" offset="0" />
+          <stop class="dock__rim-lo" offset="1" />
+        </linearGradient>
+      </defs>
+      <path class="dock__fill" id="skinFill" />
+    </svg>
+    <span class="dock__bead" id="bead" aria-hidden="true"></span>
+
+    <div class="dock__tabs" role="tablist" aria-label="Sections" id="tabs">
+      <button class="tab" role="tab" type="button" id="tab-home" data-nav-section="home" aria-selected="true" tabindex="0" style="--acc:#3b82f6">
+        <svg class="tab__icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3.5 10.6 12 3.9l8.5 6.7" />
+          <path d="M5.7 9.2v9.1a1.6 1.6 0 0 0 1.6 1.6h9.4a1.6 1.6 0 0 0 1.6-1.6V9.2" />
+          <path d="M9.9 19.9v-4.8a1.2 1.2 0 0 1 1.2-1.2h1.8a1.2 1.2 0 0 1 1.2 1.2v4.8" />
+        </svg>
+        <span class="tab__label" data-en="Home" data-ar="الرئيسية">Home</span>
+      </button>
+
+      <button class="tab" role="tab" type="button" id="tab-about" data-nav-section="about" aria-selected="false" tabindex="-1" style="--acc:#3b82f6">
+        <svg class="tab__icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="8.5" r="3.7" />
+          <path d="M4.9 20.1a7.35 7.35 0 0 1 14.2 0" />
+        </svg>
+        <span class="tab__label" data-en="About" data-ar="عني">About</span>
+      </button>
+
+      <button class="tab" role="tab" type="button" id="tab-services" data-nav-section="services" aria-selected="false" tabindex="-1" style="--acc:#3b82f6">
+        <svg class="tab__icon" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+        </svg>
+        <span class="tab__label" data-en="Services" data-ar="خدماتي">Services</span>
+      </button>
+
+      <button class="tab" role="tab" type="button" id="tab-training" data-nav-section="training" aria-selected="false" tabindex="-1" style="--acc:#3b82f6">
+        <svg class="tab__icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" />
+          <polygon points="10 8 16 12 10 16 10 8" />
+        </svg>
+        <span class="tab__label" data-en="Training" data-ar="التدريب">Training</span>
+      </button>
+
+      <button class="tab" role="tab" type="button" id="tab-contact" data-nav-section="contact" aria-selected="false" tabindex="-1" style="--acc:#3b82f6">
+        <svg class="tab__icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20.3 11.9a7.7 7.7 0 0 1-11.1 6.9l-5 1.4 1.4-4.7A7.7 7.7 0 1 1 20.3 11.9Z" />
+        </svg>
+        <span class="tab__label" data-en="Contact" data-ar="تواصل">Contact</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="nav-actions" style="pointer-events: auto; display: flex; align-items: center; gap: 10px; background: linear-gradient(135deg, rgba(14, 21, 38, 0.88) 0%, rgba(11, 18, 33, 0.95) 100%); padding: 6px 10px; border-radius: 100px; border: 1px solid rgba(45, 75, 125, 0.35); box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6); height: 52px; backdrop-filter: blur(24px) saturate(200%); -webkit-backdrop-filter: blur(24px) saturate(200%);">
+    <button class="nav-lang" id="portfolioLangBtn" style="background: rgba(14, 21, 38, 0.6); border: 1px solid rgba(45, 75, 125, 0.35); border-radius: 100px; color: #ffffff; padding: 0 26px; height: 40px; font-size: 14px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease;">العربية</button>
+    <a href="#" onclick="openQuickBrief();return false;" class="nav-cta" style="background: linear-gradient(135deg, rgba(14, 21, 38, 0.90) 0%, rgba(11, 18, 33, 0.95) 100%); border: 1px solid rgba(45, 75, 125, 0.35); color: #ffffff; border-radius: 100px; padding: 0 30px; height: 40px; font-size: 14px; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); transition: all 0.25s ease;">
       <span data-en="Book a Call" data-ar="احجز مكالمة">Book a Call</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
     </a>
   </div>
-  <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
+
+</div>
+
 
 <!-- HERO (original style with portrait BG) -->
 <section id="hero" data-page="home">
@@ -300,9 +367,11 @@
     <div class="photo-bg"></div>
   </div>
   <div class="hero-content">
-    <div class="hero-signature" data-en-only="true">
-      <img src="signature.png" alt="Karim Abdelaziz" class="signature-img">
-    </div>
+    <div class="hero-greet" data-en="Hi I'm" data-ar="أهلاً، أنا">Hi I'm</div>
+    <h1 class="hero-name" data-en-only="true">
+      <span style="display:block;">Karim</span>
+      <span style="display:block;">Abdelaziz</span>
+    </h1>
     <h1 class="hero-name" data-ar-only="true" style="display:none;">
       <span style="display:block; margin-bottom: 0.25em;">كريم</span>
       <span style="display:block;">عبدالعزيز</span>
@@ -952,7 +1021,7 @@
         </div>
         <span class="svc-cta" data-en="View Work" data-ar="شاهد الأعمال">View Work</span>
         <div class="svc-dots">
-          <span class="svc-dots-text" data-en="Tap here for more" data-ar="اضغط هنا للمزيد">Tap here for more</span>
+          <span class="svc-dots-text">Tap here for more</span>
 
         </div>
       </div>
@@ -964,7 +1033,7 @@
         </div>
         <span class="svc-cta" data-en="View Work" data-ar="شاهد الأعمال">View Work</span>
         <div class="svc-dots">
-          <span class="svc-dots-text" data-en="Tap here for more" data-ar="اضغط هنا للمزيد">Tap here for more</span>
+          <span class="svc-dots-text">Tap here for more</span>
 
         </div>
       </div>
@@ -976,7 +1045,7 @@
         </div>
         <span class="svc-cta" data-en="View Work" data-ar="شاهد الأعمال">View Work</span>
         <div class="svc-dots">
-          <span class="svc-dots-text" data-en="Tap here for more" data-ar="اضغط هنا للمزيد">Tap here for more</span>
+          <span class="svc-dots-text">Tap here for more</span>
 
         </div>
       </div>
@@ -988,7 +1057,7 @@
         </div>
         <span class="svc-cta" data-en="View Work" data-ar="شاهد الأعمال">View Work</span>
         <div class="svc-dots">
-          <span class="svc-dots-text" data-en="Tap here for more" data-ar="اضغط هنا للمزيد">Tap here for more</span>
+          <span class="svc-dots-text">Tap here for more</span>
 
         </div>
       </div>
@@ -1000,7 +1069,7 @@
         </div>
         <span class="svc-cta" data-en="View Work" data-ar="شاهد الأعمال">View Work</span>
         <div class="svc-dots">
-          <span class="svc-dots-text" data-en="Tap here for more" data-ar="اضغط هنا للمزيد">Tap here for more</span>
+          <span class="svc-dots-text">Tap here for more</span>
 
         </div>
       </div>
@@ -1012,7 +1081,7 @@
         </div>
         <span class="svc-cta" data-en="View Work" data-ar="شاهد الأعمال">View Work</span>
         <div class="svc-dots">
-          <span class="svc-dots-text" data-en="Tap here for more" data-ar="اضغط هنا للمزيد">Tap here for more</span>
+          <span class="svc-dots-text">Tap here for more</span>
 
         </div>
       </div>
@@ -1038,11 +1107,11 @@
       <!-- Content will be rendered dynamically by JS -->
     </div>
     <!-- Left Arrow -->
-    <div id="servicesSliderPrev" style="position:absolute; top:50%; left:100px; transform:translateY(-50%); z-index:999999; width:50px; height:50px; background:rgba(255, 255, 255, 0.1); border:1px solid rgba(255, 255, 255, 0.2); color:#ffffff; border-radius:12px; display:flex; align-items:center; justify-content:center; cursor:pointer; backdrop-filter:blur(15px); -webkit-backdrop-filter:blur(15px); box-shadow:0 8px 32px rgba(0,0,0,0.2); user-select:none; transition:background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; pointer-events:all; touch-action:manipulation; -webkit-tap-highlight-color:transparent;">
+    <div id="servicesSliderPrev" style="position:absolute; top:50%; left:100px; transform:translateY(-50%); z-index:999999; width:50px; height:50px; background:rgba(255, 255, 255, 0.1); border:1px solid rgba(255, 255, 255, 0.2); color:#ffffff; border-radius:12px; display:flex; align-items:center; justify-content:center; cursor:pointer; backdrop-filter:blur(15px); -webkit-backdrop-filter:blur(15px); box-shadow:0 8px 32px rgba(0,0,0,0.2); user-select:none; transition:all 0.3s ease; pointer-events:all;">
       <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>
     </div>
     <!-- Right Arrow -->
-    <div id="servicesSliderNext" style="position:absolute; top:50%; right:100px; transform:translateY(-50%); z-index:999999; width:50px; height:50px; background:rgba(255, 255, 255, 0.1); border:1px solid rgba(255, 255, 255, 0.2); color:#ffffff; border-radius:12px; display:flex; align-items:center; justify-content:center; cursor:pointer; backdrop-filter:blur(15px); -webkit-backdrop-filter:blur(15px); box-shadow:0 8px 32px rgba(0,0,0,0.2); user-select:none; transition:background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; pointer-events:all; touch-action:manipulation; -webkit-tap-highlight-color:transparent;">
+    <div id="servicesSliderNext" style="position:absolute; top:50%; right:100px; transform:translateY(-50%); z-index:999999; width:50px; height:50px; background:rgba(255, 255, 255, 0.1); border:1px solid rgba(255, 255, 255, 0.2); color:#ffffff; border-radius:12px; display:flex; align-items:center; justify-content:center; cursor:pointer; backdrop-filter:blur(15px); -webkit-backdrop-filter:blur(15px); box-shadow:0 8px 32px rgba(0,0,0,0.2); user-select:none; transition:all 0.3s ease; pointer-events:all;">
       <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
     </div>
   </div>
@@ -1052,17 +1121,17 @@
 <div class="modal-overlay" id="modal">
   <div class="modal">
     <button class="modal-close" id="modalClose">✕</button>
-    <div class="modal-eyebrow" id="modalEyebrow" data-en="Selected Work" data-ar="أعمال مختارة">Selected Work</div>
+    <div class="modal-eyebrow" id="modalEyebrow">Selected Work</div>
     <h2 class="modal-title" id="modalTitle">Video Editing</h2>
     <div class="modal-slider-wrap">
-      <button class="modal-arrow left" id="modalArrowLeft" aria-label="Previous"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+      <button class="modal-arrow left" aria-label="Previous" onclick="document.getElementById('modalWorks').scrollBy({left: -document.getElementById('modalWorks').clientWidth, behavior: 'smooth'})"><svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><polygon points="16,4 8,12 16,20"/></svg></button>
       <div class="modal-works" id="modalWorks"></div>
-      <button class="modal-arrow right" id="modalArrowRight" aria-label="Next"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+      <button class="modal-arrow right" aria-label="Next" onclick="document.getElementById('modalWorks').scrollBy({left: document.getElementById('modalWorks').clientWidth, behavior: 'smooth'})"><svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,4 16,12 8,20"/></svg></button>
     </div>
     
     <div class="modal-bottom-info">
-      <div class="modal-description" id="modalDescription" data-en="Selected work showcase for this specialization." data-ar="عرض نماذج الأعمال المختارة لهذا التخصص.">
-        Selected work showcase for this specialization.
+      <div class="modal-description" id="modalDescription">
+        LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT, SED DO EIUSMOD TEMPOR INCIDIDUNT
       </div>
       <div class="modal-pagination" id="modalPagination">
         <span class="dot active"></span>
@@ -1102,40 +1171,6 @@
         <a href="#" onclick="openQuickBrief();return false;" class="consult-btn">
           <span data-en="Book a Consultation" data-ar="احجز استشارة">Book a Consultation</span>
         </a>
-      </div>
-    </div>
-
-    <!-- WHO IS YOUR DIRECTOR SECTION -->
-    <div class="who-is-director-section">
-      <div class="who-is-director-grid">
-        <div class="who-is-director-visual">
-          <button class="director-slider-btn left" aria-label="Previous image" type="button" onclick="window.prevMentorPhoto()">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-              <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/>
-            </svg>
-          </button>
-          <div class="who-is-director-photo-wrap">
-            <img src="correct-photo.jpeg" alt="Karim Abdelaziz - Film Director" class="who-is-director-photo" id="directorPhotoImg">
-            <div class="who-is-director-photo-dots" id="directorPhotoDots"></div>
-          </div>
-          <button class="director-slider-btn right" aria-label="Next image" type="button" onclick="window.nextMentorPhoto()">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-              <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
-            </svg>
-          </button>
-        </div>
-        <div class="who-is-director-content">
-          <div class="who-is-director-eyebrow" data-en="WHO IS" data-ar="من هو">WHO IS</div>
-          <h2 class="who-is-director-title" data-en="YOUR<br><span>MENTOR?</span>" data-ar="مدربـك؟<br><span>كريم عبد العزيز</span>">
-            YOUR<br><span>MENTOR?</span>
-          </h2>
-          <p class="who-is-director-text" data-en="Karim Abdelaziz is one of the most recognized film directors and video editors in the Middle East. With over <strong>8 years</strong> of professional experience, he has been responsible for crafting cinematic content, developing brands, and positioning companies as leaders in their industry through powerful visual storytelling." data-ar="كريم عبد العزيز هو أحد أبرز مخرجي الأفلام ومونتيري الفيديو في الشرق الأوسط. بخبرة مهنية تتجاوز <strong>٨ سنوات</strong>، كان مسؤولاً عن صناعة محتوى سينمائي، تطوير العلامات التجارية، وتمكين الشركات من الريادة في مجالها من خلال السرد البصري القوي.">
-            Karim Abdelaziz is one of the most recognized film directors and video editors in the Middle East. With over <strong>8 years</strong> of professional experience, he has been responsible for crafting cinematic content, developing brands, and positioning companies as leaders in their industry through powerful visual storytelling.
-          </p>
-          <p class="who-is-director-text" data-en="In total, Karim has delivered more than <strong>1,300 projects</strong>, worked across <strong>14 countries</strong>, and collaborated with brands like <strong>Samsung, CUPRA, 9GAG, Artlist, and Asus</strong> — and now he's ready to bring that same cinematic excellence to <strong class='highlight'>your brand</strong>." data-ar="في المجمل، نفذ كريم أكثر من <strong>١,٣٠٠ مشروع</strong>، وعمل في <strong>١٤ دولة</strong>، وتعاون مع علامات تجارية مثل <strong>Samsung و CUPRA و 9GAG و Artlist و Asus</strong> — وهو الآن مستعد لنقل هذا التميز السينمائي إلى <strong class='highlight'>علامتك التجارية</strong>.">
-            In total, Karim has delivered more than <strong>1,300 projects</strong>, worked across <strong>14 countries</strong>, and collaborated with brands like <strong>Samsung, CUPRA, 9GAG, Artlist, and Asus</strong> — and now he's ready to bring that same cinematic excellence to <strong class="highlight">your brand</strong>.
-          </p>
-        </div>
       </div>
     </div>
 
@@ -1473,10 +1508,6 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
         Home Page Picture
       </a>
-      <a data-admin-page="home-page-edit">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        Home Page
-      </a>
       <a data-admin-page="intro-pages">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
         Intro Pages
@@ -1629,48 +1660,8 @@
           <div id="adminTrainingStatsList" class="admin-list" style="margin-top:20px;"></div>
         </div>
 
-        <!-- WHO IS YOUR MENTOR SECTION CARD -->
         <div class="admin-card">
-          <h3 style="margin-top: 12px; margin-bottom: 20px; color: var(--admin-accent);">Who Is Your Mentor Section (قسم الإرشاد)</h3>
-
-          <!-- MENTOR PHOTOS MANAGER -->
-          <div style="margin-top:10px; padding-top:10px;">
-            <h4 style="margin-bottom:12px; font-size:16px;">Mentor Photos (Slider Gallery)</h4>
-            <p style="font-size:13px; color:var(--admin-text-muted); margin-bottom:14px;">Add multiple photos for the mentor section. Visitors can slide through them on the Training page.</p>
-            
-            <div class="admin-add-work-form" style="gap:10px; flex-wrap:wrap; align-items:center;">
-              <input type="file" id="adminMentorPhotoFile" accept="image/*" style="display:none;">
-              <button type="button" class="admin-btn-secondary" onclick="document.getElementById('adminMentorPhotoFile').click()" style="padding:8px 14px; font-size:13px;">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg> Choose Photo File
-              </button>
-              <span style="font-size:13px; color:var(--admin-text-muted);">or</span>
-              <input type="text" id="adminMentorPhotoUrl" class="admin-input" placeholder="Paste Image URL..." style="flex:1; min-width:200px;">
-              <button type="button" class="admin-add-btn" id="adminAddMentorPhotoBtn">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14m-7-7h14"/></svg> Add Photo
-              </button>
-            </div>
-
-            <div id="adminMentorPhotosList" class="mentor-photos-admin-grid" style="margin-top:16px;"></div>
-          </div>
-
-          <!-- MENTOR PARAGRAPHS MANAGER -->
-          <div style="margin-top:24px; border-top:1px solid var(--admin-border-light); padding-top:20px;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
-              <div>
-                <h4 style="margin-bottom:4px; font-size:16px;">Mentor Bio Paragraphs & Formatting</h4>
-                <p style="font-size:13px; color:var(--admin-text-muted); margin:0;">Add, edit, remove bio text paragraphs and control normal vs bold styling.</p>
-              </div>
-              <button type="button" class="admin-add-btn" id="adminOpenAddMentorParaBtn" onclick="window.adminApp.openMentorParaModal(-1)">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14m-7-7h14"/></svg> Add Paragraph
-              </button>
-            </div>
-
-            <div id="adminMentorParasList" class="admin-list" style="margin-top:16px;"></div>
-          </div>
-        </div>
-
-        <div class="admin-card">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:20px;">
             <h3 style="margin-top: 24px; margin-bottom: 24px;">Student Videos</h3>
             <button class="admin-add-btn" id="adminAddTrainingVideoBtn">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14m-7-7h14"/></svg> Add Video
@@ -1708,7 +1699,7 @@
           <div class="admin-form-group">
             <label class="admin-label">Current Photo</label>
             <div id="adminHomePhotoPreviewContainer" style="margin-bottom: 1rem; border: 2px dashed rgba(255,255,255,0.1); border-radius: 8px; padding: 1rem; text-align: center; background: rgba(0,0,0,0.2);">
-              <img id="adminHomePhotoPreview" src="correct-photo.jpeg" alt="Home Page Picture" style="width: 250px; height: 350px; border-radius: 4px; object-fit: cover;">
+              <img id="adminHomePhotoPreview" src="Final-HomePhoto.jpeg" alt="Home Page Picture" style="width: 250px; height: 350px; border-radius: 4px; object-fit: cover;">
             </div>
             <div style="display: flex; gap: 1rem; align-items: center;">
               <input type="file" id="adminHomePhotoInput" accept="image/png, image/jpeg, image/webp" style="display: none;">
@@ -1725,114 +1716,6 @@
             <p style="margin-top: 0.5rem; font-size: 0.85rem; color: rgba(255,255,255,0.5);">
               Recommended dimensions: 2752 x 1536 pixels, transparent background. Custom photos are stored directly in your browser.
             </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- ═══ HOME PAGE EDIT ═══ -->
-      <div class="admin-page" data-admin-content="home-page-edit">
-        <div class="admin-section-header">
-          <div>
-            <h2 class="admin-section-title">Home Page</h2>
-            <p class="admin-section-subtitle">Edit the intro text and "What I Do" service cards on your home page.</p>
-          </div>
-        </div>
-
-        <!-- Section 1: Edit Intro Text -->
-        <div class="admin-card">
-          <h3 style="margin-top: 24px; margin-bottom: 16px;">Edit Intro Text of Home Page</h3>
-          <p style="font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-bottom: 20px;">
-            Edit the hero tagline text. Select any word and click <strong>B</strong> to make it bold, or <strong>N</strong> to remove bold.
-          </p>
-
-          <div class="admin-form-group">
-            <label class="admin-label">English Text</label>
-            <div class="admin-text-toolbar">
-              <button type="button" class="admin-toolbar-btn" id="introTextBoldBtnEn" title="Bold selected text">
-                <strong>B</strong>
-              </button>
-              <button type="button" class="admin-toolbar-btn" id="introTextNormalBtnEn" title="Remove bold from selected text">
-                N
-              </button>
-            </div>
-            <div id="adminHomeIntroTextEn" class="admin-richtext-editor" contenteditable="true" data-placeholder="Enter English intro text..."></div>
-          </div>
-
-          <div class="admin-form-group" style="margin-top: 20px;">
-            <label class="admin-label">Arabic Text</label>
-            <div class="admin-text-toolbar">
-              <button type="button" class="admin-toolbar-btn" id="introTextBoldBtnAr" title="Bold selected text">
-                <strong>B</strong>
-              </button>
-              <button type="button" class="admin-toolbar-btn" id="introTextNormalBtnAr" title="Remove bold from selected text">
-                N
-              </button>
-            </div>
-            <div id="adminHomeIntroTextAr" class="admin-richtext-editor" contenteditable="true" dir="rtl" data-placeholder="أدخل النص العربي..."></div>
-          </div>
-
-          <div style="text-align: right; margin-top: 20px;">
-            <button class="admin-btn-primary" id="adminSaveHomeIntroText" style="padding: 12px 24px; font-size: 16px;">Save Intro Text</button>
-          </div>
-        </div>
-
-        <!-- Section 2: Edit What I Do -->
-        <div class="admin-card" style="margin-top: 24px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-            <h3 style="margin-top: 24px; margin-bottom: 0;">Edit "What I Do" Section</h3>
-            <button class="admin-add-btn" id="adminAddHomeSvcBtn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14m-7-7h14"/></svg> Add Card
-            </button>
-          </div>
-          <p style="font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-bottom: 20px;">
-            Manage the service cards in the "Crafted for the moment." section on the home page.
-          </p>
-          <div id="adminHomeSvcList" class="admin-list"></div>
-        </div>
-
-        <!-- Modal for Add/Edit Service Card -->
-        <div class="admin-modal-overlay" id="adminHomeSvcModal">
-          <div class="admin-modal">
-            <div class="admin-modal-header">
-              <h3 id="adminHomeSvcModalTitle">Add Service Card</h3>
-              <button class="admin-modal-close">&times;</button>
-            </div>
-            <div class="admin-modal-body">
-              <input type="hidden" id="adminHomeSvcEditIndex" value="-1">
-              <div class="admin-form-group">
-                <label class="admin-label">Icon</label>
-                <select id="adminHomeSvcIcon" class="admin-input">
-                  <option value="video">🎬 Video Editing</option>
-                  <option value="camera">📷 Cinematography</option>
-                  <option value="document">📄 Brand & Documentary</option>
-                  <option value="music">🎵 Music / Audio</option>
-                  <option value="motion">✨ Motion Graphics</option>
-                  <option value="social">📱 Social Media</option>
-                  <option value="photo">🖼️ Photography</option>
-                  <option value="design">🎨 Design</option>
-                </select>
-              </div>
-              <div class="admin-form-group">
-                <label class="admin-label">Title (EN)</label>
-                <input type="text" id="adminHomeSvcTitleEn" class="admin-input" placeholder="e.g. Video Editing">
-              </div>
-              <div class="admin-form-group">
-                <label class="admin-label">Title (AR)</label>
-                <input type="text" id="adminHomeSvcTitleAr" class="admin-input" dir="rtl" placeholder="e.g. مونتاج الفيديو">
-              </div>
-              <div class="admin-form-group">
-                <label class="admin-label">Description (EN)</label>
-                <textarea id="adminHomeSvcDescEn" class="admin-input admin-textarea" rows="2" placeholder="Short description in English"></textarea>
-              </div>
-              <div class="admin-form-group">
-                <label class="admin-label">Description (AR)</label>
-                <textarea id="adminHomeSvcDescAr" class="admin-input admin-textarea" rows="2" dir="rtl" placeholder="وصف قصير بالعربية"></textarea>
-              </div>
-            </div>
-            <div class="admin-modal-footer">
-              <button class="admin-btn-secondary admin-modal-close">Cancel</button>
-              <button class="admin-btn-primary" id="adminSaveHomeSvc">Save</button>
-            </div>
           </div>
         </div>
       </div>
@@ -2045,40 +1928,6 @@
             <input type="checkbox" id="adminProvidedThirdLine" style="width: 18px; height: 18px; accent-color: var(--ka-accent, #4867ff); cursor: pointer;">
             Enable 3rd Row
           </label>
-        </div>
-
-        <!-- Edit Text Section -->
-        <div style="padding: 20px; background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); margin-bottom: 24px;">
-          <h3 style="margin-top: 0; margin-bottom: 16px; color: var(--admin-text); font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
-            Edit Text
-          </h3>
-          
-          <div class="admin-form-row" style="display: flex; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;">
-            <div class="admin-form-group" style="flex: 1; min-width: 250px;">
-              <label style="color: var(--admin-text-muted); font-size: 0.85rem; margin-bottom: 6px; display: block;">Text Between 1st & 2nd Row (English)</label>
-              <input type="text" id="adminProvidedDivider1En" class="admin-input" placeholder="not just look pretty.">
-            </div>
-            <div class="admin-form-group" style="flex: 1; min-width: 250px;">
-              <label style="color: var(--admin-text-muted); font-size: 0.85rem; margin-bottom: 6px; display: block;">Text Between 1st & 2nd Row (Arabic)</label>
-              <input type="text" id="adminProvidedDivider1Ar" class="admin-input" dir="rtl" placeholder="مش بس يبقى جميل.">
-            </div>
-          </div>
-
-          <div class="admin-form-row" style="display: flex; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;">
-            <div class="admin-form-group" style="flex: 1; min-width: 250px;">
-              <label style="color: var(--admin-text-muted); font-size: 0.85rem; margin-bottom: 6px; display: block;">Text Between 2nd & 3rd Row (English)</label>
-              <input type="text" id="adminProvidedDivider2En" class="admin-input" placeholder="not just look pretty.">
-            </div>
-            <div class="admin-form-group" style="flex: 1; min-width: 250px;">
-              <label style="color: var(--admin-text-muted); font-size: 0.85rem; margin-bottom: 6px; display: block;">Text Between 2nd & 3rd Row (Arabic)</label>
-              <input type="text" id="adminProvidedDivider2Ar" class="admin-input" dir="rtl" placeholder="مش بس يبقى جميل.">
-            </div>
-          </div>
-
-          <button class="admin-btn-primary" id="adminSaveProvidedDividerText" style="padding: 10px 20px; font-weight: 600;">
-            Save Text
-          </button>
         </div>
 
         <div id="adminProvidedList" class="admin-works-grid"></div>
@@ -2556,44 +2405,6 @@
 </div>
 
 
-<div class="admin-modal-overlay" id="adminMentorParaModal">
-  <div class="admin-modal" style="max-width:650px;">
-    <div class="admin-modal-header">
-      <h3 class="admin-modal-title" id="mentorParaModalTitle">Add Mentor Paragraph</h3>
-      <button class="admin-modal-close" onclick="document.getElementById('adminMentorParaModal').classList.remove('active')">&times;</button>
-    </div>
-    <div class="admin-modal-body">
-      <input type="hidden" id="mentorParaEditIndex" value="-1">
-      
-      <div class="admin-form-group">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <label style="margin:0;">Paragraph Text (English)</label>
-          <div style="display:flex; gap:6px;">
-            <button type="button" class="para-format-btn bold-btn" onclick="window.adminApp.toggleRichTextBold('mentorParaTextEn', true)" title="Make selected text bold">B</button>
-            <button type="button" class="para-format-btn normal-btn" onclick="window.adminApp.toggleRichTextBold('mentorParaTextEn', false)" title="Make selected text normal">N</button>
-          </div>
-        </div>
-        <div id="mentorParaTextEn" class="admin-input admin-textarea admin-richtext-editor" contenteditable="true" data-placeholder="Enter paragraph text in English..."></div>
-      </div>
-
-      <div class="admin-form-group">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <label style="margin:0;">Paragraph Text (Arabic)</label>
-          <div style="display:flex; gap:6px;">
-            <button type="button" class="para-format-btn bold-btn" onclick="window.adminApp.toggleRichTextBold('mentorParaTextAr', true)" title="Make selected text bold">B</button>
-            <button type="button" class="para-format-btn normal-btn" onclick="window.adminApp.toggleRichTextBold('mentorParaTextAr', false)" title="Make selected text normal">N</button>
-          </div>
-        </div>
-        <div id="mentorParaTextAr" class="admin-input admin-textarea admin-richtext-editor" contenteditable="true" dir="rtl" data-placeholder="أدخل نص الفقرة باللغة العربية..."></div>
-      </div>
-    </div>
-    <div class="admin-modal-footer">
-      <button class="admin-btn-secondary" onclick="document.getElementById('adminMentorParaModal').classList.remove('active')">Cancel</button>
-      <button class="admin-btn-primary" onclick="window.adminApp.saveMentorPara()">Save Paragraph</button>
-    </div>
-  </div>
-</div>
-
 <div class="admin-modal-overlay" id="adminTrainingVideoModal">
   <div class="admin-modal">
     <div class="admin-modal-header">
@@ -2830,11 +2641,14 @@
       s.src = scripts[i];
       s.charset = "UTF-8";
       s.onload = loadNext;
+
+
       document.body.appendChild(s);
       i++;
     }
     loadNext();
   }
 </script>
+<script src="liquid-nav.js?v=22"></script>
 </body>
 </html>

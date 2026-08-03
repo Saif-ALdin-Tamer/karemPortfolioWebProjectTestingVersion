@@ -2296,7 +2296,7 @@ html[dir="rtl"] .cta-primary:hover svg {
   );
   /* backdrop-filter disabled for perf */
   /* -webkit-backdrop-filter disabled */
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(70, 110, 175, 0.45);
   border-radius: 24px;
   padding: 32px;
   display: flex;
@@ -5322,6 +5322,11 @@ html[dir="rtl"] .ghost-link:hover svg {
 #home-services {
   padding: 60px 0 72px;
 }
+#home-services .reveal,
+.home-svc-card {
+  opacity: 1 !important;
+  transform: none !important;
+}
 #home-services .eyebrow,
 #home-services .heading {
   text-align: center;
@@ -7923,7 +7928,6 @@ body,
 
 /* 2. Glowing Gradient Buttons */
 .cta-primary,
-.nav-cta,
 .qb-start-btn {
   background: linear-gradient(135deg, #4489d8 0%, #2b70c0 100%) !important;
   color: #ffffff !important;
@@ -7934,8 +7938,7 @@ body,
     transform 0.3s,
     box-shadow 0.3s !important;
 }
-.cta-primary:hover,
-.nav-cta:hover {
+.cta-primary:hover {
   transform: translateY(-2px) !important;
   box-shadow: 0 12px 32px rgba(58, 127, 199, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
 }
@@ -8606,7 +8609,6 @@ html {
 
 /* 1. Global Primary Buttons (Purple/Blue Gradient) */
 .cta-primary,
-.nav-cta,
 .qb-start-btn,
 button[type="submit"] {
   background: linear-gradient(135deg, #4489d8 0%, #2b70c0 100%) !important;
@@ -8616,7 +8618,6 @@ button[type="submit"] {
   transition: all 0.3s ease !important;
 }
 .cta-primary:hover,
-.nav-cta:hover,
 .qb-start-btn:hover,
 button[type="submit"]:hover {
   box-shadow: 0 12px 32px rgba(58, 127, 199, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
@@ -9020,36 +9021,50 @@ p,
   cursor: pointer !important;
 }
 
-/* Book a Call Button (Nav Size) */
+/* Book a Call Button (Matching Dock Navy Fill rgba(14, 21, 38, 0.90)) */
+.nav-cta,
+.nav-wrapper .nav-cta,
 #nav .nav-cta {
-  background: linear-gradient(135deg, #4489d8 0%, #2b70c0 100%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: linear-gradient(135deg, rgba(14, 21, 38, 0.90) 0%, rgba(11, 18, 33, 0.95) 100%) !important;
+  border: 1px solid rgba(45, 75, 125, 0.35) !important;
   color: #ffffff !important;
   border-radius: 100px !important;
-  padding: 8px 16px !important; /* Reduced padding for mobile */
+  padding: 0 30px !important;
+  height: 40px !important;
   font-weight: 600 !important;
-  font-size: 13px !important; /* Slightly smaller text */
+  font-size: 14px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 4px !important;
-  box-shadow:
-    0 8px 24px rgba(58, 127, 199, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+  gap: 10px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
   text-decoration: none !important;
-  transition: all 0.3s ease !important;
+  transition: all 0.25s ease !important;
 }
-#nav .nav-cta svg {
-  width: 14px !important;
-  height: 14px !important;
+#nav .nav-cta svg,
+.nav-wrapper .nav-cta svg {
+  width: 16px !important;
+  height: 16px !important;
+  stroke: #ffffff !important;
   stroke-width: 2 !important;
   margin: 0 !important;
+  transition: stroke 0.25s ease !important;
 }
+.nav-cta:hover,
+.nav-wrapper .nav-cta:hover,
 #nav .nav-cta:hover {
-  transform: translateY(-2px) !important;
-  box-shadow:
-    0 12px 32px rgba(58, 127, 199, 0.55),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+  background: linear-gradient(135deg, rgba(20, 32, 58, 0.95) 0%, rgba(14, 23, 44, 0.98) 100%) !important;
+  border-color: rgba(70, 110, 175, 0.6) !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+  transform: translateY(-1px) !important;
+}
+.nav-cta:hover svg,
+.nav-wrapper .nav-cta:hover svg,
+#nav .nav-cta:hover svg {
+  stroke: #ffffff !important;
 }
 
 /* Removed Vibrant Backgrounds to match hero */
