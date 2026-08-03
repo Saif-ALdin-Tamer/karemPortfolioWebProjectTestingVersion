@@ -4029,23 +4029,26 @@ html[dir="rtl"] .modal-title,
 .testi-row.row-2 {
   margin-top: 24px;
 }
-/* Single keyframe — both rows start from translateX(0), row-2 plays in reverse */
 .testi-row.row-1 {
-  animation: marqueeMove 60s linear infinite;
+  animation: marqueeMove 38s linear infinite !important;
+  direction: ltr !important;
+  will-change: transform;
 }
 .testi-row.row-2 {
-  animation: marqueeMove 60s linear infinite reverse;
+  animation: marqueeMove 38s linear infinite reverse !important;
+  direction: ltr !important;
+  will-change: transform;
 }
 /* Pause on hover for accessibility */
 .testi-row:hover {
   animation-play-state: paused !important;
 }
 @keyframes marqueeMove {
-  from {
-    transform: translateX(0);
+  0% {
+    transform: translate3d(0, 0, 0);
   }
-  to {
-    transform: translateX(calc(-50% - 10px));
+  100% {
+    transform: translate3d(calc(-50% - 10px), 0, 0);
   }
 }
 
@@ -4301,7 +4304,9 @@ html[dir="rtl"] .modal-title,
   display: flex;
   gap: 16px;
   width: max-content;
-  animation: marqueeMove 60s linear infinite;
+  direction: ltr !important;
+  will-change: transform;
+  animation: marqueeMove 38s linear infinite !important;
   background: transparent !important;
 }
 .student-reviews-row:hover {
@@ -5171,7 +5176,7 @@ body.in-portfolio .skip-btn-floating {
   position: relative;
   width: 100%;
   overflow: hidden;
-  direction: ltr; /* Force LTR so it loops continuously in Arabic */
+  direction: ltr !important; /* Force LTR so it loops continuously in Arabic & English */
   mask-image: linear-gradient(
     to right,
     transparent 0%,
@@ -5188,19 +5193,21 @@ body.in-portfolio .skip-btn-floating {
   );
 }
 .home-brands-track {
-  display: inline-flex;
-  align-items: center;
-  gap: 48px;
-  padding-right: 48px;
-  white-space: nowrap;
-  animation: hbScroll 60s linear infinite;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 48px !important;
+  padding-right: 48px !important;
+  white-space: nowrap !important;
+  direction: ltr !important;
+  will-change: transform;
+  animation: hbScroll 42s linear infinite !important;
 }
 @keyframes hbScroll {
-  from {
-    transform: translateX(0);
+  0% {
+    transform: translate3d(0, 0, 0);
   }
-  to {
-    transform: translateX(-50%);
+  100% {
+    transform: translate3d(-50%, 0, 0);
   }
 }
 /* Removed reverse animation to allow continuous LTR looping */
