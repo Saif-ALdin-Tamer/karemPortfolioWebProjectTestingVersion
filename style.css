@@ -2163,7 +2163,9 @@ html[dir="rtl"] .nav-cta svg {
     transform: none;
   }
 }
-.hero-tagline em {
+.hero-tagline em,
+.hero-tagline strong,
+.hero-tagline b {
   font-style: normal;
   color: var(--white);
   font-weight: 500;
@@ -8507,7 +8509,9 @@ html {
   font-family: 'Montserrat', sans-serif !important;
 }
 
-.hero-tagline em {
+.hero-tagline em,
+.hero-tagline strong,
+.hero-tagline b {
   color: #ffffff !important;
   font-weight: 600 !important;
   font-style: normal !important;
