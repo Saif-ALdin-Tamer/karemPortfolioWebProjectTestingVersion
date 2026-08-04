@@ -9865,10 +9865,10 @@ video.inline-video-player::-webkit-media-controls-fullscreen-button {
   -webkit-tap-highlight-color: transparent;
 }
 .director-slider-btn.left {
-  left: -68px;
+  left: -55px;
 }
 .director-slider-btn.right {
-  right: -68px;
+  right: -55px;
 }
 .director-slider-btn:hover,
 .director-slider-btn:focus,
@@ -9898,15 +9898,36 @@ video.inline-video-player::-webkit-media-controls-fullscreen-button {
   flex-direction: column;
   gap: 18px;
 }
-.who-is-director-eyebrow {
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.45);
-  margin-bottom: -12px;
+.who-is-director-eyebrow,
+.mentor-eyebrow {
+  display: block !important;
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  letter-spacing: 4px !important;
+  text-transform: uppercase !important;
+  color: rgba(255, 255, 255, 0.55) !important;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  margin-bottom: 8px !important;
+  text-align: left !important;
+  align-self: flex-start !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
+  width: auto !important;
+}
+.who-is-director-eyebrow::before,
+.who-is-director-eyebrow::after,
+.mentor-eyebrow::before,
+.mentor-eyebrow::after {
+  display: none !important;
+  content: none !important;
 }
 .who-is-director-title {
+  font-family: 'Montserrat', sans-serif !important;
   font-size: clamp(42px, 5vw, 64px);
   font-weight: 800;
   line-height: 1.0;
@@ -9914,6 +9935,7 @@ video.inline-video-player::-webkit-media-controls-fullscreen-button {
   color: var(--white, #fff);
   margin: 0;
   margin-bottom: -4px;
+  text-align: left;
 }
 .who-is-director-title span {
   background: linear-gradient(135deg, #5fa3e0 0%, #8ec5fc 50%, #5fa3e0 100%);
@@ -9926,6 +9948,7 @@ video.inline-video-player::-webkit-media-controls-fullscreen-button {
   line-height: 1.75;
   color: rgba(255, 255, 255, 0.6);
   margin: 0;
+  text-align: left;
 }
 .who-is-director-text strong {
   color: rgba(255, 255, 255, 0.9);
@@ -9973,12 +9996,25 @@ html[dir="rtl"] .who-is-director-grid {
   direction: rtl;
 }
 
+html[dir="rtl"] .who-is-director-eyebrow,
+html[dir="rtl"] .mentor-eyebrow {
+  text-align: right !important;
+  align-self: flex-end !important;
+  margin-right: 0 !important;
+  margin-left: auto !important;
+}
+
+html[dir="rtl"] .who-is-director-title,
+html[dir="rtl"] .who-is-director-text {
+  text-align: right;
+}
+
 /* ── Responsive ── */
 @media (max-width: 900px) {
   .who-is-director-grid {
     grid-template-columns: 1fr;
     gap: 40px;
-    text-align: center;
+    text-align: left;
   }
   .who-is-director-visual {
     order: -1;
@@ -9988,20 +10024,43 @@ html[dir="rtl"] .who-is-director-grid {
     margin: 0 auto;
   }
   .who-is-director-content {
-    align-items: center;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .who-is-director-eyebrow,
+  .mentor-eyebrow {
+    text-align: left !important;
+    align-self: flex-start !important;
   }
   .who-is-director-title {
     font-size: clamp(36px, 8vw, 48px);
+    text-align: left;
+  }
+  .who-is-director-text {
+    text-align: left;
   }
   .who-is-director-section {
     margin-top: 60px;
     padding: 50px 0;
+  }
+  html[dir="rtl"] .who-is-director-grid,
+  html[dir="rtl"] .who-is-director-content {
+    align-items: flex-end;
+    text-align: right;
+  }
+  html[dir="rtl"] .who-is-director-eyebrow,
+  html[dir="rtl"] .mentor-eyebrow,
+  html[dir="rtl"] .who-is-director-title,
+  html[dir="rtl"] .who-is-director-text {
+    text-align: right !important;
+    align-self: flex-end !important;
   }
 }
 @media (max-width: 480px) {
   .who-is-director-grid {
     padding: 0 20px;
     gap: 28px;
+    text-align: left;
   }
   .who-is-director-photo-wrap {
     max-width: 220px;
@@ -10009,12 +10068,237 @@ html[dir="rtl"] .who-is-director-grid {
   .who-is-director-title {
     font-size: 32px;
     letter-spacing: -1px;
+    text-align: left;
   }
   .who-is-director-text {
     font-size: 14px;
+    text-align: left;
   }
   .who-is-director-section {
     margin-top: 40px;
     padding: 36px 0;
   }
-}
+}
+
+/* WHO IS YOUR MENTOR SECTION */
+.mentor-profile-card {
+  width: 100%;
+  margin-top: 80px;
+  margin-bottom: 80px;
+  display: grid;
+  grid-template-columns: minmax(300px, 420px) 1fr;
+  gap: 64px;
+  align-items: center;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  position: relative;
+  overflow: visible !important;
+}
+
+.mentor-profile-card::before {
+  display: none !important;
+}
+
+.mentor-profile-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.mentor-profile-img-wrap {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: 24px;
+  overflow: visible !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: transparent;
+  position: relative;
+}
+
+.mentor-profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  border-radius: 24px;
+  overflow: hidden;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mentor-profile-card:hover .mentor-profile-img {
+  transform: scale(1.03);
+}
+
+.mentor-profile-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.mentor-profile-content .eyebrow,
+.who-is-director-eyebrow {
+  display: block !important;
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  letter-spacing: 4px !important;
+  color: rgba(255, 255, 255, 0.55) !important;
+  opacity: 1 !important;
+  text-transform: uppercase !important;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  margin-bottom: 8px !important;
+  text-align: left !important;
+  align-self: flex-start !important;
+  width: auto !important;
+}
+
+.mentor-profile-content .eyebrow::before,
+.mentor-profile-content .eyebrow::after,
+.who-is-director-eyebrow::before,
+.who-is-director-eyebrow::after {
+  display: none !important;
+  content: none !important;
+}
+
+.mentor-profile-title {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 64px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -1.5px;
+  line-height: 0.95;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.mentor-profile-title .accent-text,
+.mentor-profile-title span {
+  display: block;
+  color: #60a5fa;
+  margin-top: 2px;
+}
+
+.mentor-profile-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #94a3b8;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.mentor-profile-text:last-child {
+  margin-bottom: 0;
+}
+
+.mentor-profile-text strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.mentor-highlight-link {
+  color: #60a5fa;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.2s ease;
+}
+
+.mentor-highlight-link:hover {
+  color: #93c5fd;
+}
+
+/* RTL layout */
+html[dir="rtl"] .mentor-profile-content {
+  align-items: flex-end;
+  text-align: right;
+}
+
+html[dir="rtl"] .mentor-profile-content .eyebrow,
+html[dir="rtl"] .who-is-director-eyebrow {
+  text-align: right !important;
+  align-self: flex-end !important;
+}
+
+html[dir="rtl"] .mentor-profile-title,
+html[dir="rtl"] .mentor-profile-text {
+  text-align: right;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .mentor-profile-card {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
+  .mentor-profile-img-wrap {
+    max-width: 360px;
+    margin: 0 auto;
+  }
+  .mentor-profile-content {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .mentor-profile-content .eyebrow {
+    text-align: left !important;
+    align-self: flex-start !important;
+  }
+  .mentor-profile-title {
+    font-size: 38px;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  .mentor-profile-text {
+    text-align: left;
+  }
+  html[dir="rtl"] .mentor-profile-content {
+    align-items: flex-end;
+    text-align: right;
+  }
+  html[dir="rtl"] .mentor-profile-content .eyebrow {
+    text-align: right !important;
+    align-self: flex-end !important;
+  }
+  html[dir="rtl"] .mentor-profile-title,
+  html[dir="rtl"] .mentor-profile-text {
+    text-align: right;
+  }
+}
+
+@media (max-width: 576px) {
+  .mentor-profile-card {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+  .mentor-profile-img-wrap {
+    max-width: 280px;
+  }
+  .mentor-profile-title {
+    font-size: 28px;
+    letter-spacing: -0.8px;
+    text-align: left;
+  }
+  .mentor-profile-text {
+    font-size: 14px;
+    line-height: 1.65;
+    text-align: left;
+  }
+  html[dir="rtl"] .mentor-profile-title,
+  html[dir="rtl"] .mentor-profile-text {
+    text-align: right;
+  }
+}
+
+

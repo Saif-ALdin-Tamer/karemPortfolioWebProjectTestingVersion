@@ -401,20 +401,35 @@
     saved.stats = saved.stats || (window.TRAINING_DATA ? window.TRAINING_DATA.stats : []);
     saved.videos = saved.videos || (window.TRAINING_DATA ? window.TRAINING_DATA.videos : []);
     
+    const defaultWhoIs = (window.TRAINING_DATA && window.TRAINING_DATA.whoIsMentor)
+      ? JSON.parse(JSON.stringify(window.TRAINING_DATA.whoIsMentor))
+      : {
+          eyebrowEn: 'WHO IS',
+          eyebrowAr: 'من هو',
+          titleEn: 'YOUR<br><span>MENTOR?</span>',
+          titleAr: 'مدربـك؟<br><span>كريم عبد العزيز</span>',
+          photos: ['Final-HomePhoto.webp', 'correct-photo.jpeg'],
+          paragraphs: [
+            {
+              textEn: "Karim Abdelaziz is one of the most recognized film directors and video editors in the Middle East. With over <strong>8 years</strong> of professional experience, he has been responsible for crafting cinematic content, developing brands, and positioning companies as leaders in their industry through powerful visual storytelling.",
+              textAr: "كريم عبد العزيز هو أحد أبرز مخرجي الأفلام ومونتيري الفيديو في الشرق الأوسط. بخبرة مهنية تتجاوز <strong>٨ سنوات</strong>، كان مسؤولاً عن صناعة محتوى سينمائي، تطوير العلامات التجارية، وتمكين الشركات من الريادة في مجالها من خلال السرد البصري القوي."
+            },
+            {
+              textEn: "In total, Karim has delivered more than <strong>1,300 projects</strong>, worked across <strong>14 countries</strong>, and collaborated with brands like <strong>Samsung, CUPRA, 9GAG, Artlist, and Asus</strong> — and now he's ready to bring that same cinematic excellence to <strong>your brand</strong>.",
+              textAr: "في المجمل، نفذ كريم أكثر من <strong>١,٣٠٠ مشروع</strong>، وعمل في <strong>١٤ دولة</strong>، وتعاون مع علامات تجارية مثل <strong>Samsung و CUPRA و 9GAG و Artlist و Asus</strong> — وهو الآن مستعد لنقل هذا التميز السينمائي إلى <strong>علامتك التجارية</strong>."
+            }
+          ]
+        };
+
     if (!saved.whoIsMentor) {
-      saved.whoIsMentor = (window.TRAINING_DATA && window.TRAINING_DATA.whoIsMentor)
-        ? JSON.parse(JSON.stringify(window.TRAINING_DATA.whoIsMentor))
-        : {
-            eyebrowEn: 'WHO IS',
-            eyebrowAr: 'من هو',
-            titleEn: 'YOUR<br><span>MENTOR?</span>',
-            titleAr: 'مدربـك؟<br><span>كريم عبد العزيز</span>',
-            photos: ['correct-photo.jpeg'],
-            paragraphs: []
-          };
+      saved.whoIsMentor = defaultWhoIs;
     }
-    saved.whoIsMentor.photos = saved.whoIsMentor.photos || ['correct-photo.jpeg'];
-    saved.whoIsMentor.paragraphs = saved.whoIsMentor.paragraphs || [];
+    if (!saved.whoIsMentor.photos || !Array.isArray(saved.whoIsMentor.photos) || saved.whoIsMentor.photos.length === 0) {
+      saved.whoIsMentor.photos = defaultWhoIs.photos;
+    }
+    if (!saved.whoIsMentor.paragraphs || !Array.isArray(saved.whoIsMentor.paragraphs) || saved.whoIsMentor.paragraphs.length === 0) {
+      saved.whoIsMentor.paragraphs = defaultWhoIs.paragraphs;
+    }
 
     return saved;
   }
@@ -1396,6 +1411,32 @@
   window.adminApp = window.adminApp || {};
   window.adminApp.editTrainingVideo = openTrainingVideoModal;
 
+  window.adminApp.formatParaText = function(editorId, command) {
+    const editor = getEl(editorId);
+    if (!editor) return;
+    editor.focus();
+    if (command === 'bold') {
+      document.execCommand('bold', false, null);
+    } else if (command === 'normal') {
+      document.execCommand('removeFormat', false, null);
+      document.execCommand('unlink', false, null);
+      const sel = window.getSelection();
+      if (sel && !sel.isCollapsed && sel.rangeCount > 0) {
+        const range = sel.getRangeAt(0);
+        let parent = range.commonAncestorContainer;
+        if (parent.nodeType === 3) parent = parent.parentNode;
+        while (parent && parent !== editor) {
+          if (parent.tagName === 'STRONG' || parent.tagName === 'B') {
+            const textNode = document.createTextNode(parent.textContent);
+            parent.parentNode.replaceChild(textNode, parent);
+            break;
+          }
+          parent = parent.parentNode;
+        }
+      }
+    }
+  };
+
   window.adminApp.openMentorParaModal = function(index = -1) {
     const modal = getEl('adminMentorParaModal');
     if(!modal) return;
@@ -1421,9 +1462,13 @@
     let textEn = enEditor ? enEditor.innerHTML : '';
     let textAr = arEditor ? arEditor.innerHTML : '';
 
-    // Standardize <b> tags to <strong>
-    textEn = textEn.replace(/<b\b[^>]*>(.*?)<\/b>/gi, '<strong>$1</strong>');
-    textAr = textAr.replace(/<b\b[^>]*>(.*?)<\/b>/gi, '<strong>$1</strong>');
+    // Standardize <b> and span bold tags to <strong>
+    textEn = textEn
+      .replace(/<b\b[^>]*>(.*?)<\/b>/gi, '<strong>$1</strong>')
+      .replace(/<span style="font-weight:\s*bold;?">(.*?)<\/span>/gi, '<strong>$1</strong>');
+    textAr = textAr
+      .replace(/<b\b[^>]*>(.*?)<\/b>/gi, '<strong>$1</strong>')
+      .replace(/<span style="font-weight:\s*bold;?">(.*?)<\/span>/gi, '<strong>$1</strong>');
 
     const cleanEn = (enEditor ? (enEditor.innerText || enEditor.textContent) : '').trim();
     const cleanAr = (arEditor ? (arEditor.innerText || arEditor.textContent) : '').trim();
@@ -1447,7 +1492,9 @@
 
     saveTrainingData(d);
     renderAdminMentorParagraphs();
-    getEl('adminMentorParaModal').classList.remove('active');
+    if (getEl('adminMentorParaModal')) {
+      getEl('adminMentorParaModal').classList.remove('active');
+    }
     showToast(index >= 0 ? 'Paragraph updated globally' : 'Paragraph added globally');
   };
 

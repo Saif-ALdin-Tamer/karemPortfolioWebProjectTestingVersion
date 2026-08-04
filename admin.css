@@ -1412,35 +1412,177 @@ body.admin-mode::-webkit-scrollbar-thumb:hover,
 
 /* Paragraph Format Buttons (B & N) */
 .para-format-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  background: rgba(18, 30, 52, 0.85);
-  border: 1px solid rgba(100, 140, 255, 0.3);
-  color: #ffffff;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  font-family: inherit;
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  user-select: none;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  padding: 8px 16px !important;
+  border-radius: 8px !important;
+  background: rgba(255, 255, 255, 0.07) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  color: #ffffff !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  user-select: none !important;
+  line-height: 1 !important;
+  width: auto !important;
+  height: auto !important;
+  box-sizing: border-box !important;
 }
-.para-format-btn.bold-btn {
-  font-weight: 800;
-}
-.para-format-btn.normal-btn {
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.7);
-}
+
 .para-format-btn:hover {
-  background: rgba(72, 103, 255, 0.35);
-  border-color: rgba(110, 168, 229, 0.7);
-  color: #ffffff;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(72, 103, 255, 0.2);
+  background: rgba(59, 130, 246, 0.25) !important;
+  border-color: rgba(59, 130, 246, 0.7) !important;
+  color: #6ea8e5 !important;
 }
-.para-format-btn:active {
-  transform: translateY(0);
+
+.para-format-btn .btn-icon-bold {
+  font-weight: 900 !important;
+  font-size: 15px !important;
+  color: #6ea8e5 !important;
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: inline !important;
 }
+
+.para-format-btn .btn-icon-normal {
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  color: rgba(255, 255, 255, 0.6) !important;
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: inline !important;
+}
+
+/* Styling for Bold/Emphasized text inside Admin Editors */
+#adminHomeIntroTextEn em,
+#adminHomeIntroTextAr em,
+#adminHomeIntroTextEn strong,
+#adminHomeIntroTextAr strong,
+#adminHomeIntroTextEn b,
+#adminHomeIntroTextAr b,
+.admin-input em,
+.admin-input strong,
+.admin-input b {
+  font-weight: 800 !important;
+  font-style: normal !important;
+  color: #6ea8e5 !important;
+  background: rgba(72, 103, 255, 0.25);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(110, 168, 229, 0.4);
+  display: inline-block;
+}
+
+/* Full Mobile & Tablet Responsiveness */
+@media (max-width: 768px) {
+  .admin-main {
+    padding: 12px !important;
+  }
+  .admin-card {
+    padding: 16px !important;
+  }
+  .admin-section-header {
+    flex-direction: column;
+    align-items: stretch !important;
+    gap: 12px;
+  }
+  .admin-form-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .admin-grid,
+  .admin-stats-grid,
+  .admin-works-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .admin-modal {
+    width: 95% !important;
+    max-height: 90vh;
+    padding: 16px !important;
+    overflow-y: auto;
+  }
+  div[style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ══════════════════ 6. RICH TEXT EDITOR & MENTOR SECTION ══════════════════ */
+.admin-editor-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.admin-rich-editor {
+  min-height: 100px;
+  max-height: 220px;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.15));
+  border-radius: 8px;
+  padding: 12px 14px;
+  color: #fff;
+  line-height: 1.6;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  word-break: break-word;
+}
+
+.admin-rich-editor:focus {
+  border-color: var(--admin-accent, #3b82f6);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+}
+
+.admin-rich-editor:empty::before {
+  content: attr(data-placeholder);
+  color: rgba(255, 255, 255, 0.35);
+  pointer-events: none;
+  display: block;
+}
+
+.admin-rich-editor strong,
+.admin-rich-editor b {
+  font-weight: 800 !important;
+  color: #6ea8e5 !important;
+  background: rgba(72, 103, 255, 0.22);
+  padding: 1px 5px;
+  border-radius: 4px;
+  border: 1px solid rgba(110, 168, 229, 0.35);
+}
+
+/* Responsive adjustments for Mentor photo cards and action bars */
+@media (max-width: 600px) {
+  .mentor-photo-admin-card {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+  }
+  .mentor-photo-admin-card img {
+    width: 100% !important;
+    height: 140px !important;
+  }
+  .admin-add-photo-bar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  .admin-add-photo-bar input,
+  .admin-add-photo-bar button,
+  .admin-add-photo-bar label {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+  .admin-editor-toolbar {
+    width: 100%;
+  }
+}
+

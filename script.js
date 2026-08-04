@@ -1967,6 +1967,7 @@ window.TRAINING_DATA = {
     titleEn: 'YOUR<br><span>MENTOR?</span>',
     titleAr: 'مدربـك؟<br><span>كريم عبد العزيز</span>',
     photos: [
+      'Final-HomePhoto.webp',
       'correct-photo.jpeg'
     ],
     paragraphs: [
@@ -1976,8 +1977,8 @@ window.TRAINING_DATA = {
         isBold: false
       },
       {
-        textEn: "In total, Karim has delivered more than <strong>1,300 projects</strong>, worked across <strong>14 countries</strong>, and collaborated with brands like <strong>Samsung, CUPRA, 9GAG, Artlist, and Asus</strong> — and now he's ready to bring that same cinematic excellence to <strong class=\"highlight\">your brand</strong>.",
-        textAr: "في المجمل، نفذ كريم أكثر من <strong>١,٣٠٠ مشروع</strong>، وعمل في <strong>١٤ دولة</strong>، وتعاون مع علامات تجارية مثل <strong>Samsung و CUPRA و 9GAG و Artlist و Asus</strong> — وهو الآن مستعد لنقل هذا التميز السينمائي إلى <strong class=\"highlight\">علامتك التجارية</strong>.",
+        textEn: "In total, Karim has delivered more than <strong>1,300 projects</strong>, worked across <strong>14 countries</strong>, and collaborated with brands like <strong>Samsung, CUPRA, 9GAG, Artlist, and Asus</strong> — and now he's ready to bring that same cinematic excellence to <strong>your brand</strong>.",
+        textAr: "في المجمل، نفذ كريم أكثر من <strong>١,٣٠٠ مشروع</strong>، وعمل في <strong>١٤ دولة</strong>، وتعاون مع علامات تجارية مثل <strong>Samsung و CUPRA و 9GAG و Artlist و Asus</strong> — وهو الآن مستعد لنقل هذا التميز السينمائي إلى <strong>علامتك التجارية</strong>.",
         isBold: false
       }
     ]
@@ -2803,22 +2804,29 @@ document.addEventListener('keydown', function(e) {
 });
 
 // Who Is Your Mentor photo slider functions
-window.mentorPhotosList = window.mentorPhotosList || ['correct-photo.jpeg'];
+window.mentorPhotosList = window.mentorPhotosList || ['Final-HomePhoto.webp', 'correct-photo.jpeg'];
 window.mentorPhotoIndex = 0;
 
 window.updateMentorPhotoDisplay = function() {
   const img = document.getElementById('directorPhotoImg');
   if (!img) return;
-  const photos = window.mentorPhotosList || ['correct-photo.jpeg'];
+  const photos = (window.mentorPhotosList && window.mentorPhotosList.length > 0)
+    ? window.mentorPhotosList
+    : ['Final-HomePhoto.webp', 'correct-photo.jpeg'];
+
   if (window.mentorPhotoIndex < 0) window.mentorPhotoIndex = photos.length - 1;
   if (window.mentorPhotoIndex >= photos.length) window.mentorPhotoIndex = 0;
 
-  const curSrc = photos[window.mentorPhotoIndex] || 'correct-photo.jpeg';
-  img.style.opacity = '0.3';
-  setTimeout(() => {
-    img.src = curSrc;
-    img.style.opacity = '1';
-  }, 150);
+  const curSrc = photos[window.mentorPhotoIndex] || 'Final-HomePhoto.webp';
+  const currentAttr = img.getAttribute('src') || '';
+
+  if (currentAttr !== curSrc && !img.src.endsWith(curSrc)) {
+    img.style.opacity = '0.4';
+    setTimeout(() => {
+      img.src = curSrc;
+      img.style.opacity = '1';
+    }, 150);
+  }
 
   const dotsCont = document.getElementById('directorPhotoDots');
   if (dotsCont) {
@@ -2839,14 +2847,18 @@ window.setMentorPhoto = function(index) {
 };
 
 window.prevMentorPhoto = function() {
-  const photos = window.mentorPhotosList || ['correct-photo.jpeg'];
+  const photos = (window.mentorPhotosList && window.mentorPhotosList.length > 0)
+    ? window.mentorPhotosList
+    : ['Final-HomePhoto.webp', 'correct-photo.jpeg'];
   if (photos.length === 0) return;
   window.mentorPhotoIndex = (window.mentorPhotoIndex - 1 + photos.length) % photos.length;
   window.updateMentorPhotoDisplay();
 };
 
 window.nextMentorPhoto = function() {
-  const photos = window.mentorPhotosList || ['correct-photo.jpeg'];
+  const photos = (window.mentorPhotosList && window.mentorPhotosList.length > 0)
+    ? window.mentorPhotosList
+    : ['Final-HomePhoto.webp', 'correct-photo.jpeg'];
   if (photos.length === 0) return;
   window.mentorPhotoIndex = (window.mentorPhotoIndex + 1) % photos.length;
   window.updateMentorPhotoDisplay();
@@ -2934,16 +2946,16 @@ window.renderFrontendTrainingPage = function() {
   // Render Who Is Your Mentor Section
   const m = d.whoIsMentor;
   if (m) {
-    const mentorSec = section.querySelector('.who-is-director-section');
+    const mentorSec = section.querySelector('.who-is-director-section, .mentor-profile-card');
     if (mentorSec) {
-      const mEyebrow = mentorSec.querySelector('.who-is-director-eyebrow');
+      const mEyebrow = mentorSec.querySelector('.who-is-director-eyebrow, .eyebrow');
       if (mEyebrow) {
         if (m.eyebrowEn) mEyebrow.setAttribute('data-en', m.eyebrowEn);
         if (m.eyebrowAr) mEyebrow.setAttribute('data-ar', m.eyebrowAr);
         mEyebrow.innerHTML = curLang === 'ar' ? (m.eyebrowAr || m.eyebrowEn || '') : (m.eyebrowEn || m.eyebrowAr || '');
       }
 
-      const mTitle = mentorSec.querySelector('.who-is-director-title');
+      const mTitle = mentorSec.querySelector('.who-is-director-title, .mentor-profile-title');
       if (mTitle) {
         if (m.titleEn) mTitle.setAttribute('data-en', m.titleEn);
         if (m.titleAr) mTitle.setAttribute('data-ar', m.titleAr);
@@ -2958,15 +2970,15 @@ window.renderFrontendTrainingPage = function() {
         window.updateMentorPhotoDisplay();
       }
 
-      if (m.paragraphs && Array.isArray(m.paragraphs)) {
-        const pCont = mentorSec.querySelector('.who-is-director-content');
+      if (m.paragraphs && Array.isArray(m.paragraphs) && m.paragraphs.length > 0) {
+        const pCont = mentorSec.querySelector('.who-is-director-content, .mentor-profile-content');
         if (pCont) {
-          const oldParas = pCont.querySelectorAll('.who-is-director-text');
+          const oldParas = pCont.querySelectorAll('.who-is-director-text, .mentor-profile-text');
           oldParas.forEach(el => el.remove());
 
           m.paragraphs.forEach(p => {
             const pEl = document.createElement('p');
-            pEl.className = `who-is-director-text ${p.isBold ? 'who-is-director-text-bold' : ''}`;
+            pEl.className = `mentor-profile-text ${p.isBold ? 'who-is-director-text-bold' : ''}`;
             const textEn = p.textEn || '';
             const textAr = p.textAr || '';
             pEl.setAttribute('data-en', textEn);
