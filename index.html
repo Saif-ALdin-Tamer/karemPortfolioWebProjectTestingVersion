@@ -1523,6 +1523,10 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
         Overview
       </a>
+      <a data-admin-page="home-page-edit">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Home Page
+      </a>
       <a data-admin-page="home-page-picture">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
         Home Page Picture
@@ -1738,6 +1742,55 @@
         </div>
         <div class="admin-list" id="adminIntroList">
           <!-- Intro pages will be rendered here -->
+        </div>
+      </div>
+
+      <!-- ═══ HOME PAGE EDIT PAGE ═══ -->
+      <div class="admin-page" data-admin-content="home-page-edit">
+        <div class="admin-section-header">
+          <div>
+            <h2 class="admin-section-title">Home Page Settings</h2>
+            <p class="admin-section-subtitle">Manage home page tagline, intro text, and service cards.</p>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <h3 style="margin-top: 10px; margin-bottom: 12px;">Home Page Intro / Hero Tagline</h3>
+          <p style="color:var(--admin-text-muted); font-size:13px; margin-bottom:20px; line-height:1.5;">
+            Modify the main hero intro text. Use selection formatting toolbar to wrap in <em>Emphasis/Italics</em>.
+          </p>
+
+          <div class="admin-form-group">
+            <label class="admin-label">Intro Text (English)</label>
+            <div class="admin-editor-toolbar">
+              <button type="button" class="admin-btn-secondary" id="introTextBoldBtnEn" style="padding: 4px 8px; font-size: 12px;"><em>Italicize/Emphasize Selection</em></button>
+              <button type="button" class="admin-btn-secondary" id="introTextNormalBtnEn" style="padding: 4px 8px; font-size: 12px;">Remove Italics</button>
+            </div>
+            <div id="adminHomeIntroTextEn" class="admin-rich-editor" contenteditable="true" data-placeholder="Enter English intro..."></div>
+          </div>
+
+          <div class="admin-form-group" style="margin-top: 20px;">
+            <label class="admin-label">Intro Text (Arabic)</label>
+            <div class="admin-editor-toolbar">
+              <button type="button" class="admin-btn-secondary" id="introTextBoldBtnAr" style="padding: 4px 8px; font-size: 12px;"><em>Italicize/Emphasize Selection</em></button>
+              <button type="button" class="admin-btn-secondary" id="introTextNormalBtnAr" style="padding: 4px 8px; font-size: 12px;">Remove Italics</button>
+            </div>
+            <div id="adminHomeIntroTextAr" class="admin-rich-editor" contenteditable="true" dir="rtl" data-placeholder="Enter Arabic intro..."></div>
+          </div>
+
+          <div style="text-align: right; margin-top: 20px;">
+            <button class="admin-btn-primary" id="adminSaveHomeIntroText">Save Intro Text</button>
+          </div>
+        </div>
+
+        <div class="admin-card" style="margin-top: 24px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+            <h3 style="margin:0;">Service Cards</h3>
+            <button class="admin-add-btn" id="adminAddHomeSvcBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg> Add Card
+            </button>
+          </div>
+          <div id="adminHomeSvcList" class="admin-list"></div>
         </div>
       </div>
 
@@ -1982,6 +2035,40 @@
             <input type="checkbox" id="adminProvidedThirdLine" style="width: 18px; height: 18px; accent-color: var(--ka-accent, #4867ff); cursor: pointer;">
             Enable 3rd Row
           </label>
+        </div>
+
+        <!-- Divider & Sub-Text Settings Card -->
+        <div class="admin-card" style="margin-bottom: 24px;">
+          <h3 style="margin-top: 0; margin-bottom: 12px;">Divider & Sub-Text Settings</h3>
+          <p style="color:var(--admin-text-muted); font-size:13px; margin-bottom:20px; line-height:1.5;">
+            Edit the divider tagline text (e.g. <em>"not just look pretty."</em>) that appears between service rows on the Provided Services page.
+          </p>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+            <div class="admin-form-group">
+              <label class="admin-label">Divider 1 Text (English)</label>
+              <input type="text" id="adminProvidedDivider1En" class="admin-input" placeholder="e.g. not just look pretty.">
+            </div>
+            <div class="admin-form-group">
+              <label class="admin-label">Divider 1 Text (Arabic)</label>
+              <input type="text" id="adminProvidedDivider1Ar" class="admin-input" dir="rtl" placeholder="e.g. مش بس يبقى جميل.">
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+            <div class="admin-form-group">
+              <label class="admin-label">Divider 2 Text (English - Row 3)</label>
+              <input type="text" id="adminProvidedDivider2En" class="admin-input" placeholder="e.g. not just look pretty.">
+            </div>
+            <div class="admin-form-group">
+              <label class="admin-label">Divider 2 Text (Arabic - Row 3)</label>
+              <input type="text" id="adminProvidedDivider2Ar" class="admin-input" dir="rtl" placeholder="e.g. مش بس يبقى جميل.">
+            </div>
+          </div>
+
+          <div style="text-align: right;">
+            <button class="admin-btn-primary" id="adminSaveProvidedDividerText">Save Divider Text</button>
+          </div>
         </div>
 
         <div id="adminProvidedList" class="admin-works-grid"></div>
@@ -2505,6 +2592,57 @@
     <div class="admin-modal-footer">
       <button class="admin-btn-secondary admin-modal-close">Cancel</button>
       <button class="admin-btn-primary" id="adminSaveTrainingVideo">Save Video</button>
+    </div>
+  </div>
+</div>
+
+<!-- HOME PAGE SERVICE CARD MODAL -->
+<div class="admin-modal-overlay" id="adminHomeSvcModal">
+  <div class="admin-modal">
+    <div class="admin-modal-header">
+      <h3 class="admin-modal-title" id="adminHomeSvcModalTitle">Add Service Card</h3>
+      <button class="admin-modal-close" onclick="document.getElementById('adminHomeSvcModal').classList.remove('active')">&times;</button>
+    </div>
+    <div class="admin-modal-body">
+      <input type="hidden" id="adminHomeSvcEditIndex" value="-1">
+      
+      <div class="admin-form-group">
+        <label>Icon</label>
+        <select id="adminHomeSvcIcon" class="admin-input admin-select">
+          <option value="video">Video (Camera/Cut)</option>
+          <option value="camera">Camera</option>
+          <option value="document">Document/Script</option>
+          <option value="music">Music</option>
+          <option value="motion">Motion/Star</option>
+          <option value="social">Social/Mobile</option>
+          <option value="photo">Photo/Image</option>
+          <option value="design">Design/Pencil</option>
+        </select>
+      </div>
+
+      <div class="admin-form-group">
+        <label>Title (English)</label>
+        <input type="text" id="adminHomeSvcTitleEn" class="admin-input">
+      </div>
+
+      <div class="admin-form-group">
+        <label>Title (Arabic)</label>
+        <input type="text" id="adminHomeSvcTitleAr" class="admin-input" dir="rtl">
+      </div>
+
+      <div class="admin-form-group">
+        <label>Description (English)</label>
+        <textarea id="adminHomeSvcDescEn" class="admin-input admin-textarea" rows="3"></textarea>
+      </div>
+
+      <div class="admin-form-group">
+        <label>Description (Arabic)</label>
+        <textarea id="adminHomeSvcDescAr" class="admin-input admin-textarea" rows="3" dir="rtl"></textarea>
+      </div>
+    </div>
+    <div class="admin-modal-footer">
+      <button class="admin-btn-secondary" onclick="document.getElementById('adminHomeSvcModal').classList.remove('active')">Cancel</button>
+      <button class="admin-btn-primary" id="adminSaveHomeSvc">Save Card</button>
     </div>
   </div>
 </div>

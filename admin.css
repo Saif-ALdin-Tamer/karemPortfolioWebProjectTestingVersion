@@ -257,6 +257,18 @@ body.admin-mode .floating-actions-container {
   gap: 8px;
   overflow-y: auto;
   min-height: 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+}
+.admin-nav::-webkit-scrollbar {
+  width: 4px;
+}
+.admin-nav::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+}
+.admin-nav::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .admin-nav a {

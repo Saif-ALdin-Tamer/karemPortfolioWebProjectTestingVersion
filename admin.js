@@ -33,9 +33,33 @@
   };
 
   const DEFAULT_ANALYTICS = {
-    viewers: [],
-    clicks: [],
-    contacts: []
+    viewers: [
+      { id: 1, date: '2026-07-10', count: 25 },
+      { id: 2, date: '2026-07-11', count: 32 },
+      { id: 3, date: '2026-07-12', count: 18 },
+      { id: 4, date: '2026-07-13', count: 41 },
+      { id: 5, date: '2026-07-14', count: 22 }
+    ],
+    clicks: [
+      { id: 1, date: '2026-07-10', count: 12 },
+      { id: 2, date: '2026-07-11', count: 15 },
+      { id: 3, date: '2026-07-12', count: 9 },
+      { id: 4, date: '2026-07-13', count: 20 },
+      { id: 5, date: '2026-07-14', count: 11 }
+    ],
+    contacts: [
+      { id: 1, date: '2026-07-10', channel: 'WhatsApp', count: 3 },
+      { id: 2, date: '2026-07-11', channel: 'Email', count: 2 },
+      { id: 3, date: '2026-07-12', channel: 'Calendly', count: 1 },
+      { id: 4, date: '2026-07-13', channel: 'WhatsApp', count: 5 },
+      { id: 5, date: '2026-07-14', channel: 'Email', count: 3 }
+    ],
+    activity: [
+      { text: 'Added work "dms,mdk" to editing', time: '2026-07-14T04:45:46.000Z' },
+      { text: 'Added work "sc" to editing', time: '2026-07-14T04:45:06.000Z' },
+      { text: 'Added image to Provided Services: motion', time: '2026-07-14T04:31:54.000Z' },
+      { text: 'Added image to Provided Services: motion', time: '2026-07-14T04:31:49.000Z' }
+    ]
   };
 
   const WORK_TAGS = {
@@ -235,15 +259,25 @@
   function loadData() {
     // Override global arrays with saved admin data if available
     const savedClients = localStorage.getItem(STORAGE_KEYS.CLIENT_REVIEWS);
-    if (savedClients && window.clientReviews) {
-      window.clientReviews = JSON.parse(savedClients);
-      if (typeof window.initTestimonials === 'function') window.initTestimonials();
+    if (savedClients) {
+      try {
+        const parsed = JSON.parse(savedClients);
+        if (Array.isArray(parsed) && parsed.length > 0) window.clientReviews = parsed;
+      } catch(e) {}
+    }
+    if (typeof window.initTestimonials === 'function' && window.clientReviews) {
+      window.initTestimonials();
     }
     
     const savedStudents = localStorage.getItem(STORAGE_KEYS.STUDENT_REVIEWS);
-    if (savedStudents && window.studentReviews) {
-      window.studentReviews = JSON.parse(savedStudents);
-      if (typeof window.initStudentReviews === 'function') window.initStudentReviews();
+    if (savedStudents) {
+      try {
+        const parsed = JSON.parse(savedStudents);
+        if (Array.isArray(parsed) && parsed.length > 0) window.studentReviews = parsed;
+      } catch(e) {}
+    }
+    if (typeof window.initStudentReviews === 'function' && window.studentReviews) {
+      window.initStudentReviews();
     }
     
     const savedWorks = localStorage.getItem(STORAGE_KEYS.WORKS);
@@ -360,7 +394,14 @@
   }
 
   function loadAnalytics() {
-    return safeJSONParse(localStorage.getItem(STORAGE_KEYS.ANALYTICS), DEFAULT_ANALYTICS);
+    const data = safeJSONParse(localStorage.getItem(STORAGE_KEYS.ANALYTICS), null);
+    if (!data) return JSON.parse(JSON.stringify(DEFAULT_ANALYTICS));
+    return {
+      viewers: (data.viewers && data.viewers.length > 0) ? data.viewers : DEFAULT_ANALYTICS.viewers,
+      clicks: (data.clicks && data.clicks.length > 0) ? data.clicks : DEFAULT_ANALYTICS.clicks,
+      contacts: (data.contacts && data.contacts.length > 0) ? data.contacts : DEFAULT_ANALYTICS.contacts,
+      activity: (data.activity && data.activity.length > 0) ? data.activity : DEFAULT_ANALYTICS.activity
+    };
   }
 
   function saveAnalytics(data) {
@@ -394,7 +435,7 @@
       localStorage.removeItem(STORAGE_KEYS.TRAINING_DATA);
     }
     
-    if (!saved) return JSON.parse(JSON.stringify(window.TRAINING_DATA || {}));
+    if (!saved) saved = JSON.parse(JSON.stringify(window.TRAINING_DATA || {}));
     
     // Ensure arrays and objects exist
     saved.bullets = saved.bullets || (window.TRAINING_DATA ? window.TRAINING_DATA.bullets : []);
@@ -2559,8 +2600,12 @@
           getEl('adminUsername').value = '';
           getEl('adminPassword').value = '';
           
+          document.body.classList.add('admin-mode');
+          document.documentElement.classList.add('admin-mode');
+          loadData();
           if(window.spaGo) window.spaGo('admin', true);
           else window.location.hash = 'admin';
+          adminNavigate('overview');
           
           btn.innerText = 'Sign In';
         } catch(err) {
@@ -3007,10 +3052,16 @@
         }
       });
     }
-    
+
     // Expose needed functions globally for inline handlers
     window.adminApp = window.adminApp || {};
     Object.assign(window.adminApp, {
+      reloadAndRender: function() {
+        loadData();
+        const activeNav = document.querySelector('.admin-nav a.active');
+        const page = activeNav ? activeNav.getAttribute('data-admin-page') : 'overview';
+        adminNavigate(page || 'overview');
+      },
       editIntro: (idx) => openIntroModal(idx),
       editReview: (type, idx) => openReviewModal(type, idx),
       deleteReview,

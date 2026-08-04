@@ -3050,6 +3050,10 @@ window.addEventListener('DOMContentLoaded', function() {
         if (typeof renderProvidedSection === 'function') renderProvidedSection();
         if (typeof renderMapCountries === 'function') renderMapCountries();
         if (typeof renderGlobalStats === 'function') renderGlobalStats();
+
+        if (window.adminApp && typeof window.adminApp.reloadAndRender === 'function') {
+          window.adminApp.reloadAndRender();
+        }
       }
     });
   }
