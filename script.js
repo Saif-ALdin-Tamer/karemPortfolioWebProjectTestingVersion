@@ -2830,14 +2830,7 @@ window.updateMentorPhotoDisplay = function() {
 
   const dotsCont = document.getElementById('directorPhotoDots');
   if (dotsCont) {
-    if (photos.length > 1) {
-      dotsCont.style.display = 'flex';
-      dotsCont.innerHTML = photos.map((_, i) => `
-        <span class="photo-dot ${i === window.mentorPhotoIndex ? 'active' : ''}" onclick="window.setMentorPhoto(${i})"></span>
-      `).join('');
-    } else {
-      dotsCont.style.display = 'none';
-    }
+    dotsCont.style.display = 'none';
   }
 };
 
